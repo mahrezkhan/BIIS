@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './NavBar';
+import Home from './Home';
 
 function App() {
+  const Title="BUET INSTITUTIONAL INFORMATION SYSTEM";
+  const BIIS="https://biis.buet.ac.bd/";
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar ></NavBar>
+      <div className="content">
+        <Home></Home>
+        <h1>{Title}</h1>
+        <p>Mahrez Hussain Khan <br /> Apurbo Das Pranto</p>
+        <p>{Math.random()}</p>
+        <a href={BIIS}>BIIS</a>
+      </div>
     </div>
   );
 }
