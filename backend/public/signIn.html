@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .signin-container {
+      background: white;
+      padding: 30px 35px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 420px;
+      transition: 0.3s ease;
+    }
+
+    .signin-container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4a4a4a;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+      transition: 0.2s ease;
+    }
+
+    input:focus {
+      border-color: #ff7e5f;
+      background: #fff;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background: #ff7e5f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #e0674c;
+      transform: scale(1.02);
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    @media (max-width: 480px) {
+      .signin-container {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signin-container">
+    <h2>Sign In</h2>
+    <form method="POST" action="/signin">
+      <label for="identifier">Email or Username</label>
+      <input name="identifier" id="identifier" required>
+
+      <label for="password">Password</label>
+      <input name="password" id="password" type="password" required>
+      <a href="forgot-password.html" style="display:block; text-align:right; color:#ff7e5f; margin-top: 10px;">Forgot Password?</a>
+      <button type="submit">Sign In</button>
+    </form>
+    <p class="footer-text">Don't have an account? <a href="index.html" style="color:#ff7e5f;">Sign Up</a></p>
+  </div>
+</body>
+</html>
