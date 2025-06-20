@@ -11,13 +11,18 @@
 /* Optional App wrapper */
 .App {
   background-color: #ffffff;
+  align-items: last baseline;
+  text-align: left;
+
 }
 
 /* NavBar styles */
 .NavBar {
+  position: absolute;     /* Take it out of normal flow */
+  top: 100px;              /* Distance from the top of screen */
+  left: 150px; 
   padding: 20px;
   display: flex;
-  align-items: center;
   max-width: 600px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
