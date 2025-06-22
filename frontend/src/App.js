@@ -1,20 +1,24 @@
-import NavBar from "./NavBar";
-import Home from "./Home";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import LandingPage from "./components/LandingPage";
+import TeacherPage from "./components/TeacherPage";
+import StudentPage from "./components/StudentPage";
+import AdminPage from "./components/AdminPage";
+
+import './index.css';
 
 function App() {
-  const Title = "BUET INSTITUTIONAL INFORMATION SYSTEM";
-  const BIIS = "https://biis.buet.ac.bd/";
   return (
-    <div className="App">
-      <NavBar />
-      <Home />
-      <h1>{Title}</h1>
-      <p>
-        Mahrez Hussain Khan <br /> Apurbo Das Pranto
-      </p>
-      <p>{Math.random()}</p>
-      <a href={BIIS}>BIIS</a>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/teacher" element={<TeacherPage />} />
+          <Route path="/student" element={<StudentPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

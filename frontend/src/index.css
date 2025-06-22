@@ -1,58 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-/* Base styles */
-* {
+/* src/index.css */
+
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
+  background: #f0f2f5;
+  color: #333;
 }
 
-/* Optional App wrapper */
 .App {
-  background-color: #ffffff;
-  align-items: last baseline;
-  text-align: left;
-
-}
-
-/* NavBar styles */
-.NavBar {
-  position: absolute;     /* Take it out of normal flow */
-  top: 100px;              /* Distance from the top of screen */
-  left: 150px; 
-  padding: 20px;
-  display: flex;
-  max-width: 600px;
-  margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
-}
-.NavBar h1 {
-  color: #f1356d;
-}
-.NavBar .links {
-  margin-left: auto;
-}
-.NavBar a {
-  margin-left: 16px;
-  text-decoration: none;
-  padding: 6px;
-}
-.NavBar a:hover {
-  color: #f1356d;
-}
-
-.Home {
-  position: absolute;     /* Take it out of normal flow */
-  top: 500px;              /* Distance from the top of screen */
-  left: 350px;             /* Distance from the left of screen */
-  padding: 20px;
-  text-align: left;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-}
-
-.Home h2 {
-  color: #f1356d;
-  margin-bottom: 10px;
+  text-align: center;
 }
