@@ -1,0 +1,63 @@
+.teacher-login {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.teacher-login h2 {
+  text-align: center;
+  color: #004080;
+  margin-bottom: 25px;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #002a5e;
+}
+
+.signup-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.signup-link span {
+  color: #004080;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-link span:hover {
+  color: #002a5e;
+}
