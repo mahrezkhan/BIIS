@@ -1,7 +1,7 @@
 *{
   user-select: none;
 }
-.student-login {
+.admin-login {
   max-width: 400px;
   margin: 80px auto;
   padding: 40px;
@@ -12,7 +12,7 @@
   margin-top: 250px;
 }
 
-.student-login h2 {
+.admin-login h2 {
   text-align: center;
   color: #004080;
   margin-bottom: 25px;
@@ -47,21 +47,4 @@
 
 .login-form button:hover {
   background-color: #002a5e;
-}
-
-.signup-link {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-}
-
-.signup-link span {
-  color: #004080;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.signup-link span:hover {
-  color: #002a5e;
 }

@@ -1,3 +1,6 @@
+*{
+  user-select: none;
+}
 .signup-container {
   max-width: 450px;
   margin: 60px auto;
@@ -6,15 +9,19 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: "Quicksand", sans-serif;
+  margin-top: 150px;
+
 }
 
 .signup-container h2 {
+  
   text-align: center;
   color: #004080;
   margin-bottom: 25px;
 }
 
 .signup-form label {
+  
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;

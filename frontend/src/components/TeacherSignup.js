@@ -3,9 +3,7 @@ import { useState } from 'react';
 
 const TeacherSignup = () => {
   const [form, setForm] = useState({
-    name: '',
     email: '',
-    employeeId: '',
     password: '',
     confirmPassword: '',
   });
@@ -25,36 +23,20 @@ const TeacherSignup = () => {
 
     setError('');
     // Later: send to backend
-    alert(`Teacher account created for ${form.name}`);
+    alert(`Teacher account created for ${form.email}`);
   };
 
   return (
     <div className="teacher-signup-container">
       <h2>Create Teacher Account</h2>
       <form onSubmit={handleSubmit} className="teacher-signup-form">
-        <label>Full Name</label>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
 
         <label>Email</label>
         <input
           type="email"
           name="email"
+          placeholder="teacher@buet.ac.bd"
           value={form.email}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Employee ID</label>
-        <input
-          type="text"
-          name="employeeId"
-          value={form.employeeId}
           onChange={handleChange}
           required
         />
@@ -63,6 +45,7 @@ const TeacherSignup = () => {
         <input
           type="password"
           name="password"
+          placeholder="Enter password"
           value={form.password}
           onChange={handleChange}
           required
@@ -72,6 +55,7 @@ const TeacherSignup = () => {
         <input
           type="password"
           name="confirmPassword"
+          placeholder="Confirm password"
           value={form.confirmPassword}
           onChange={handleChange}
           required

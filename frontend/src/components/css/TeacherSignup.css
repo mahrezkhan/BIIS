@@ -1,3 +1,6 @@
+*{
+  user-select: none;
+}
 .teacher-signup-container {
   max-width: 450px;
   margin: 60px auto;
@@ -6,6 +9,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: "Quicksand", sans-serif;
+  margin-top: 200px;
 }
 
 .teacher-signup-container h2 {

@@ -1,28 +1,51 @@
 import './css/StudentPage.css';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // for navigation
+import { useNavigate } from 'react-router-dom';
+import axios from '../api/axiosInstance'; // use axios instance
 
 const StudentPage = () => {
-  const [email, setEmail] = useState('');
+  const [StudentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Logging in as: ${email}`);
-    // later: send login request to backend
+
+    try {
+      const response = await axios.post('/auth/signin', {
+        login_id: StudentId,
+        password: password
+      });
+
+      // Get token and message
+      const { token, message } = response.data;
+
+      // ✅ Store token (for later API access)
+      localStorage.setItem('token', token);
+
+      // Navigate to student dashboard (placeholder route)
+      navigate('/student/dashboard');
+
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message); // Show backend message (invalid ID, password, etc.)
+      } else {
+        setError('Server error. Try again later.');
+      }
+    }
   };
 
   return (
     <div className="student-login">
       <h2>Student Portal Login</h2>
       <form onSubmit={handleSubmit} className="login-form">
-        <label>Email:</label>
+        <label>Student ID:</label>
         <input
-          type="email"
-          placeholder="student@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="22XXXXX"
+          value={StudentId}
+          onChange={(e) => setStudentId(e.target.value)}
           required
         />
 
@@ -34,6 +57,8 @@ const StudentPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
+        {error && <p className="error">{error}</p>}
 
         <button type="submit">Sign In</button>
       </form>

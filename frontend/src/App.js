@@ -5,7 +5,6 @@ import StudentPage from "./components/StudentPage";
 import AdminPage from "./components/AdminPage";
 import StudentSignup from "./components/StudentSignup";
 import TeacherSignup from "./components/TeacherSignup";
-
 import "./index.css";
 
 function App() {

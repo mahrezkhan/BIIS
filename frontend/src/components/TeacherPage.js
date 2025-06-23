@@ -20,7 +20,7 @@ const TeacherPage = () => {
         <label>Email:</label>
         <input
           type="email"
-          placeholder="teacher@example.com"
+          placeholder="teacher@buet.ac.bd"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
