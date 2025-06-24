@@ -19,14 +19,15 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/admin', require('./routes/admin'));
-app.use('/api', require('./routes/protected'));
+app.use('/api/auth', require('./routes/auth'));       // signup, signin
+app.use('/api/admin', require('./routes/admin'));     // verify, pending users
+app.use('/api', require('./routes/protected'));      // JWT-protected demo route
 const studentRoutes = require('./routes/student');
-app.use('/api/student', studentRoutes);
+app.use('/api/student', studentRoutes);              // student-specific info
 
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
