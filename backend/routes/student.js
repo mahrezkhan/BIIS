@@ -7,7 +7,7 @@ const authenticateToken = require("../middleware/auth");
 // Get current student profile
 
 
-router.get("/me", authenticateToken, async (res, req) => {
+router.get("/me", authenticateToken, async (req, res) => {
   const login_id = req.user.login_id;
 
   try {
@@ -60,28 +60,42 @@ router.put("/me", authenticateToken, async (req, res) => {
     birth_date,
     nid,
     bank_account_number,
+    mobile_banking_method,
+    mobile_banking_account
   } = req.body;
 
   try {
     const result = await pool.query(
       `UPDATE STUDENT
-       SET name = $1, email = $2, phone_number = $3,
+       SET name = $1, email = $2, mobile_number = $3,
            district = $4, upazilla = $5, additional_address = $6,
            contact_person_name = $7, contact_person_address = $8,
-           mobile_number = $9
-       WHERE login_id = $10
+           contact_person_mobile_number=$9,
+           birth_registration_no=$10,
+           birth_date=$11,
+           nid=$12,
+           bank_account_number = $13,
+           mobile_banking_method= $14,
+          mobile_banking_account = $15
+       WHERE login_id = $16
        RETURNING *`,
       [
         name,
         email,
-        phone_number,
+        mobile_number,
         district,
         upazilla,
         additional_address,
         contact_person_name,
         contact_person_address,
-        mobile_number,
-        login_id,
+        contact_person_mobile_number,
+        birth_registration_no,
+        birth_date,
+        nid,
+        bank_account_number,
+        mobile_banking_method,
+        mobile_banking_account,
+        login_id
       ]
     );
 
