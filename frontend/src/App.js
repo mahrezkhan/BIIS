@@ -3,6 +3,7 @@ import LandingPage from "./components/LandingPage";
 import TeacherPage from "./components/TeacherPage";
 import StudentPage from "./components/StudentPage";
 import AdminPage from "./components/AdminPage";
+import AdminDashboard from './components/AdminDashboard';
 import StudentSignup from "./components/StudentSignup";
 import TeacherSignup from "./components/TeacherSignup";
 import StudentDashboard from "./components/StudentDashboard";
@@ -18,6 +19,7 @@ function App() {
           <Route path="/student" element={<StudentPage />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/teacher/signup" element={<TeacherSignup />} />
         </Routes>

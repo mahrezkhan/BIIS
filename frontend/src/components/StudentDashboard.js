@@ -34,18 +34,7 @@ const StudentDashboard = () => {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <header className="dashboard-header">
-          <div className="header-logo">BIIS</div>
-          <div className="menu-icon" onClick={() => setShowMenu(!showMenu)}>
-            <MoreVertical size={24} />
-          </div>
-          {showMenu && (
-            <div className="dropdown-menu">
-              <button onClick={handleProfileClick}>My Profile</button>
-              {/* More options can go here */}
-            </div>
-          )}
-        </header>
+        <h2>BIIS</h2>
         <div
           className="menu-icon"
           onClick={() => setShowMenu((prev) => !prev)}
@@ -53,7 +42,7 @@ const StudentDashboard = () => {
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && setShowMenu((prev) => !prev)}>
-          <MoreVertical size={24} />
+          <MoreVertical size={30} />
         </div>
         {showMenu && (
           <div className="dropdown-menu" ref={menuRef}>

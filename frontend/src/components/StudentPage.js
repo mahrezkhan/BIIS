@@ -1,17 +1,39 @@
-import './css/StudentPage.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import "./css/StudentPage.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../api/axiosInstance";
 
 const StudentPage = () => {
-  const [StudentId, setStudentId] = useState('');
-  const [password, setPassword] = useState('');
+  const [StudentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("handleSubmit triggered");
+    setError("");
+    try {
+      console.log({ login_id: StudentId, password: password });
+      const response = await axios.post("/auth/signin", {
+        login_id: StudentId,
+        password: password,
+      });
 
-    // Just navigate directly, no API call yet
-    navigate('/student/dashboard');
+      const { token } = response.data;
+      console.log(response.data.message);
+      // Save token to localStorage
+      localStorage.setItem("token", token);
+
+      // Redirect to student dashboard
+      navigate("/student/dashboard");
+    } catch (err) {
+      // If the backend sends an error response (like 400, 401, 403)
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Server error. Please try again later.");
+      }
+    }
   };
 
   return (
@@ -35,13 +57,15 @@ const StudentPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
+        {error && <p className="error">{error}</p>}
         <button type="submit">Sign In</button>
       </form>
 
       <p className="signup-link">
-        Don't have an account?{' '}
-        <span onClick={() => navigate('/student/signup')}>Create New Account</span>
+        Don't have an account?{" "}
+        <span onClick={() => navigate("/student/signup")}>
+          Create New Account
+        </span>
       </p>
     </div>
   );
