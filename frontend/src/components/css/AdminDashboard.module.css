@@ -1,34 +1,34 @@
 /* AdminDashboard.css */
 
 /* Admin Dashboard Container */
-.admin-dashboard {
+.dashboard {
   display: flex;
   height: 100vh;
   overflow: hidden;
   user-select: none;
-  background: linear-gradient(135deg, #2f3c7e, #121936);
+  background-color: #0959a4;
   color: #e0e6f8;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Sidebar */
-.admin-dashboard__sidebar {
+.sidebar {
   width: 260px;
-  background: #1f2753;
+  background: #004080;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   box-shadow:
-    4px 0 30px rgba(0, 0, 0, 0.5),
+    4px 0 10px rgba(0, 0, 0, 0.5),
     inset 0 0 15px rgba(255, 255, 255, 0.05);
   transition: width 0.3s ease;
 }
 
-.admin-dashboard__sidebar:hover {
+.sidebar:hover {
   width: 280px;
 }
 
-.admin-dashboard__sidebar h2 {
+.sidebarh2 {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 2rem;
@@ -37,7 +37,7 @@
   text-shadow: 0 0 12px #82aaff88;
 }
 
-.admin-dashboard__sidebar nav a {
+.sidebar nav a {
   display: block;
   text-decoration: none;
   padding: 12px 18px;
