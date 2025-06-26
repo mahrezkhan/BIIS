@@ -7,6 +7,26 @@ const pool = require('../db/db');
 router.post('/signup', async (req, res) => {
   const { login_id, password, email, user_type } = req.body;
 
+  // Validate required fields
+if (!login_id || !password || !email || !user_type) {
+  return res.status(400).json({ message: 'All fields (login_id, password, email, user_type) are required' });
+}
+// Validate required fields
+if (!login_id || !password || !email || !user_type) {
+  return res.status(400).json({ message: 'All fields (login_id, password, email, user_type) are required' });
+}
+
+//  restrict to known user types
+const validTypes = ['student', 'teacher', 'admin'];
+if (!validTypes.includes(user_type.toLowerCase())) {
+  return res.status(400).json({ message: 'Invalid user_type. Must be student, teacher, or admin.' });
+}
+
+if (!validTypes.includes(user_type.toLowerCase())) {
+  return res.status(400).json({ message: 'Invalid user_type. Must be student, teacher, or admin.' });
+}
+
+
   try {
     const check = await pool.query("SELECT * FROM LOGIN WHERE login_id = $1", [login_id]);
     if (check.rows.length > 0) {
