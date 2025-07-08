@@ -63,18 +63,18 @@ CREATE TABLE STUDENT (
     DEPARTMENT_ID VARCHAR(20),
     HALL_ID INT,
     ADVISOR_ID INT,
-    NAME VARCHAR(100),*
+    NAME VARCHAR(100),
     BIRTH_REGISTRATION_NO VARCHAR(20) UNIQUE NOT NULL,
     BIRTH_DATE DATE,
-    NID VARCHAR(20) UNIQUE,*
-    BANK_ACCOUNT_NUMBER VARCHAR(30) UNIQUE,*
-    EMAIL VARCHAR(100) UNIQUE NOT NULL,*
-    DISTRICT VARCHAR(50),*
-    UPAZILLA VARCHAR(50),*
-    ADDITIONAL_ADDRESS TEXT,*
-    CONTACT_PERSON_NAME VARCHAR(100),*
-    CONTACT_PERSON_ADDRESS TEXT,*
-    MOBILE_NUMBER VARCHAR(20),*
+    NID VARCHAR(20) UNIQUE,
+    BANK_ACCOUNT_NUMBER VARCHAR(30) UNIQUE,
+    EMAIL VARCHAR(100) UNIQUE NOT NULL,
+    DISTRICT VARCHAR(50),
+    UPAZILLA VARCHAR(50),
+    ADDITIONAL_ADDRESS TEXT,
+    CONTACT_PERSON_NAME VARCHAR(100),
+    CONTACT_PERSON_ADDRESS TEXT,
+    MOBILE_NUMBER VARCHAR(20),
     FOREIGN KEY (LOGIN_ID) REFERENCES LOGIN(LOGIN_ID),
     FOREIGN KEY (LEVEL_TERM_ID) REFERENCES LEVEL_TERM(LEVEL_TERM_ID),
     FOREIGN KEY (DEPARTMENT_ID) REFERENCES DEPARTMENT(DEPARTMENT_ID),
@@ -223,6 +223,127 @@ ADD COLUMN contact_person_mobile_number VARCHAR(15),
 ADD COLUMN mobile_banking_method VARCHAR(20),
 ADD COLUMN mobile_banking_account VARCHAR(30);
 
+INSERT INTO hall (hall_id, hall_name, superviser_name, phone_number, email)
+VALUES
+(1, 'Sher-e-Bangla Hall', 'Dr. Md. Ruhul Amin', '01700000001', 'sherhall@buet.ac.bd'),
+(2, 'Suhrawardy Hall', 'Dr. Md. Mahbubur Rahman', '01700000002', 'suhrawardyhall@buet.ac.bd'),
+(3, 'Titumir Hall', 'Dr. A. K. M. Sadrul Islam', '01700000003', 'titumirhall@buet.ac.bd'),
+(4, 'Ahsanullah Hall', 'Dr. Md. Shahjahan', '01700000004', 'ahsanullahhall@buet.ac.bd'),
+(5, 'Chattri Hall', 'Dr. Kaniz Fatema', '01700000005', 'chattrihall@buet.ac.bd'),
+(6, 'Nazrul Islam Hall', 'Dr. M. A. Rashid', '01700000006', 'nazrulhall@buet.ac.bd'),
+(7, 'Bangabandhu Sheikh Mujibur Rahman Hall', 'Dr. Mohammad Ali', '01700000007', 'bsrmhall@buet.ac.bd');
 
+-- Step 1: Add level_term_id column
+ALTER TABLE enrollment
+ADD COLUMN level_term_id INT;
+
+-- Step 2: Add foreign key constraint to level_term table
+ALTER TABLE enrollment
+ADD CONSTRAINT fk_enrollment_level_term
+FOREIGN KEY (level_term_id) REFERENCES level_term(level_term_id);
+
+-- Step 3: Drop the old primary key (login_id, course_id)
+ALTER TABLE enrollment
+DROP CONSTRAINT enrollment_pkey;
+
+-- Step 4: Add new composite primary key (login_id, course_id, level_term_id)
+ALTER TABLE enrollment
+ADD PRIMARY KEY (login_id, course_id, level_term_id);
+
+ALTER TABLE enrollment DROP CONSTRAINT enrollment_course_id_fkey;
+ALTER TABLE teacher_course DROP CONSTRAINT teacher_course_course_id_fkey;
+ALTER TABLE grade DROP CONSTRAINT grade_course_id_fkey;
+
+DROP TABLE course;
+CREATE TABLE course (
+    COURSE_ID VARCHAR(20) PRIMARY KEY,
+    DEPARTMENT_ID VARCHAR(20),
+    LEVEL_TERM_ID INT,
+    TITLE VARCHAR(100),
+    CREDIT NUMERIC(4,2),
+    FOREIGN KEY (DEPARTMENT_ID) REFERENCES DEPARTMENT(DEPARTMENT_ID),
+    FOREIGN KEY (LEVEL_TERM_ID) REFERENCES LEVEL_TERM(LEVEL_TERM_ID)
+);
+
+ALTER TABLE enrollment
+ADD CONSTRAINT enrollment_course_id_fkey
+FOREIGN KEY (course_id) REFERENCES course(course_id);
+
+ALTER TABLE teacher_course
+ADD CONSTRAINT teacher_course_course_id_fkey
+FOREIGN KEY (course_id) REFERENCES course(course_id);
+
+ALTER TABLE grade
+ADD CONSTRAINT grade_course_id_fkey
+FOREIGN KEY (course_id) REFERENCES course(course_id);
+
+
+DROP TABLE teacher_course;
+CREATE TABLE teacher_course (
+    COURSE_ID VARCHAR(20),
+    LOGIN_ID INT,
+    PRIMARY KEY (COURSE_ID, LOGIN_ID),  -- ✅ Composite PK allows many-to-many
+    FOREIGN KEY (COURSE_ID) REFERENCES COURSE(COURSE_ID),
+    FOREIGN KEY (LOGIN_ID) REFERENCES TEACHER(LOGIN_ID)
+);
+
+CREATE TABLE enrollment_requests (
+    enrollment_request_id SERIAL PRIMARY KEY,
+    login_id INT,  -- Student's login_id
+    selected_courses TEXT[],  -- Array of course_ids selected by the student
+    request_date DATE NOT NULL,  -- Date of request
+    status VARCHAR(20) DEFAULT 'pending',  -- Request status: 'pending', 'approved', 'rejected'
+    advisor_id INT,  -- Advisor's login_id (teacher)
+    FOREIGN KEY (login_id) REFERENCES student(login_id),
+    FOREIGN KEY (advisor_id) REFERENCES teacher(login_id)  -- Assumes teacher has login_id in teacher table
+);
+
+
+-- Populating the Level Term table
+INSERT INTO level_term (level_term_id, level, term)
+VALUES
+(1, 'Level 1', 'Term 1'),
+(2, 'Level 1', 'Term 2'),
+(3, 'Level 2', 'Term 1'),
+(4, 'Level 2', 'Term 2'),
+(5, 'Level 3', 'Term 1'),
+(6, 'Level 3', 'Term 2'),
+(7, 'Level 4', 'Term 1'),
+(8, 'Level 4', 'Term 2');
+
+
+-- Populating the Department table with BUET departments
+INSERT INTO department (department_id, name)
+VALUES 
+('ARCH', 'Architecture'),
+('URP', 'Urban and Regional Planning'),
+('CSE', 'Computer Science and Engineering'),
+('EEE', 'Electrical and Electronics Engineering'),
+('ME', 'Mechanical Engineering'),
+('CE', 'Civil Engineering'),
+('IPE', 'Industrial and Production Engineering'),
+('BME', 'Biomedical Engineering');
+
+drop table level_term;
+
+UPDATE level_term
+SET level = CASE 
+    WHEN level = 'Level 1' THEN '1'
+    WHEN level = 'Level 2' THEN '2'
+    WHEN level = 'Level 3' THEN '3'
+    WHEN level = 'Level 4' THEN '4'
+    ELSE level 
+END,
+term = CASE 
+    WHEN term = 'Term 1' THEN '1'
+    WHEN term = 'Term 2' THEN '2'
+    ELSE term
+END;
+
+ALTER TABLE LOGIN
+ADD COLUMN email VARCHAR(100);
+
+ALTER TABLE LOGIN
+ADD COLUMN status VARCHAR(20) DEFAULT 'pending';
 
 
