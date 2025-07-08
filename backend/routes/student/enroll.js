@@ -2,10 +2,10 @@
 // routes/student.js
 const express = require("express");
 const router = express.Router();
-const pool = require("../db/db");
-const authenticateToken = require("../middleware/auth");
+const pool = require("../../db/db");
+const authenticateToken = require("../../middleware/auth");
 // POST /api/student/enroll
-router.post('/enroll', authenticateStudent, async (req, res) => {
+router.post('/enroll', authenticateToken, async (req, res) => {
   const { selected_courses } = req.body;  // Array of selected course IDs
   const login_id = req.user.login_id;
 
