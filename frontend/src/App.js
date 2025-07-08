@@ -16,10 +16,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/teacher" element={<TeacherPage />} />
-          <Route path="/student" element={<StudentPage />} />
+          <Route path="/teacher/signin" element={<TeacherPage />} />
+          <Route path="/student/signin" element={<StudentPage />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/signin" element={<AdminPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/a" element={<A />} />
           <Route path="/student/signup" element={<StudentSignup />} />

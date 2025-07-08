@@ -1,17 +1,15 @@
 import styles from './css/AdminDashboard.module.css';
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const handleLogout = () => {
+    // Handle logout logic
     // localStorage.removeItem("token");
     // navigate("/admin/login");
-    // <nav>
-    //   <a href=""></a>
-    // </nav>
   };
 
   return (
@@ -20,24 +18,35 @@ const AdminDashboard = () => {
         <h2 className={styles.sidebartitle}>Admin Portal</h2>
         <nav>
           <a
-          href="/admin/dashboard"
-          className={
+            href="/admin/dashboard"
+            className={
               location.pathname === '/admin/dashboard'
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }
-          >DashBoard</a>
+          >
+            Dashboard
+          </a>
           <a 
-          href=""
-          className={
-              location.pathname === '/admin/dashboard'
+            href="/admin/users"
+            className={
+              location.pathname === '/admin/users'
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }
-          >Users</a>
-          
-          
-
+          >
+            Users
+          </a>
+          <a
+            href="/admin/settings"
+            className={
+              location.pathname === '/admin/settings'
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }
+          >
+            Settings
+          </a>
         </nav>
       </aside>
     </div>

@@ -1,4 +1,4 @@
-import './css/TeacherPage.css';
+import styles from './css/TeacherPage.module.css'; // Import the module CSS
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,11 +14,11 @@ const TeacherPage = () => {
   };
 
   return (
-    <div className="teacher-login">
+    <div className={styles.teacherLogin}>
       <h2>Teacher Portal Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label>Email:</label>
-        <input
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <label className={styles.head}>Email:</label>
+        <input className={styles.loginForm}
           type="email"
           placeholder="teacher@buet.ac.bd"
           value={email}
@@ -26,8 +26,8 @@ const TeacherPage = () => {
           required
         />
 
-        <label>Password:</label>
-        <input
+        <label className={styles.head}>Password:</label>
+        <input className={styles.loginForm}
           type="password"
           placeholder="Enter your password"
           value={password}
@@ -38,9 +38,9 @@ const TeacherPage = () => {
         <button type="submit">Sign In</button>
       </form>
 
-      <p className="signup-link">
-        Don’t have an account?{' '}
-        <span onClick={() => navigate('/teacher/signup')}>Create New Account</span>
+      <p className={styles.head}>
+        Don't have an account?{' '}
+        <span className={styles.signupLink} onClick={() => navigate('/teacher/signup')}>Create New Account</span>
       </p>
     </div>
   );

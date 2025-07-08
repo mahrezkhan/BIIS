@@ -1,5 +1,6 @@
-import './css/TeacherSignup.css';
+import styles from './css/TeacherSignup.module.css';  // Import the module CSS
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const TeacherSignup = () => {
   const [form, setForm] = useState({
@@ -9,6 +10,7 @@ const TeacherSignup = () => {
   });
 
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook to navigate to different pages
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,14 +26,17 @@ const TeacherSignup = () => {
     setError('');
     // Later: send to backend
     alert(`Teacher account created for ${form.email}`);
+
+    // Navigate to TeacherPage or any other page after signup
+    navigate('/teacher'); // Redirect to TeacherPage after successful sign-up
   };
 
   return (
-    <div className="teacher-signup-container">
+    <div className={styles.teacherSignupContainer}>
       <h2>Create Teacher Account</h2>
-      <form onSubmit={handleSubmit} className="teacher-signup-form">
+      <form onSubmit={handleSubmit} className={styles.teacherSignupForm}>
 
-        <label>Email</label>
+        <label className={styles.head}>Email</label>
         <input
           type="email"
           name="email"
@@ -41,7 +46,7 @@ const TeacherSignup = () => {
           required
         />
 
-        <label>Password</label>
+        <label className={styles.head}>Password</label>
         <input
           type="password"
           name="password"
@@ -51,7 +56,7 @@ const TeacherSignup = () => {
           required
         />
 
-        <label>Confirm Password</label>
+        <label className={styles.head}>Confirm Password</label>
         <input
           type="password"
           name="confirmPassword"
@@ -61,7 +66,7 @@ const TeacherSignup = () => {
           required
         />
 
-        {error && <p className="error">{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         <button type="submit">Register</button>
       </form>

@@ -1,0 +1,39 @@
+/* Container for the landing page */
+.landingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Center horizontally */
+  justify-content: center;  /* Center vertically */
+  height: 100vh;  /* Full viewport height */
+  background-color: #0959a4;
+  text-align: center;
+  position: relative;
+}
+
+/* Positioning "BUET" at top-left but slightly to the right */
+.buetTitle {
+  position: absolute;
+  top: 20px; /* Distance from top */
+  left: 50px; /* Distance from left edge */
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Welcome message just above the access cards */
+.welcomeMessage {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 50px; /* Reduced margin-bottom to bring closer to cards */
+}
+
+/* Access Cards container */
+.accessCardContainer {
+  display: flex;
+  justify-content: center;  /* Center cards horizontally */
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 0;  /* Removed negative margin */
+}

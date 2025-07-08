@@ -1,5 +1,4 @@
-// src/components/StudentSignup.js
-import './css/StudentSignup.css';
+import styles from './css/StudentSignup.module.css';  // Import the module CSS
 import { useState } from 'react';
 import axios from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
@@ -37,11 +36,11 @@ const StudentSignup = () => {
         user_type: 'student'
       });
       console.log("after signup form...");
-      //setSuccess(res.data.message);
       setError('');
+      setSuccess('Account created successfully!');
       console.log(res.data); 
       // Redirect to login page after short delay
-      //setTimeout(() => navigate('/student'), 2000);
+      setTimeout(() => navigate('/student'), 2000);
 
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');
@@ -51,10 +50,10 @@ const StudentSignup = () => {
   };
 
   return (
-    <div className="signup-container">
+    <div className={styles.signupContainer}>
       <h2>Create Student Account</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <label>Student ID</label>
+      <form onSubmit={handleSubmit} className={styles.signupForm}>
+        <label className={styles.head}>Student ID</label>
         <input
           type="text"
           name="studentId"
@@ -64,7 +63,7 @@ const StudentSignup = () => {
           required
         />
 
-        <label>Email</label>
+        <label className={styles.head}>Email</label>
         <input
           type="email"
           name="email"
@@ -74,7 +73,7 @@ const StudentSignup = () => {
           required
         />
 
-        <label>Password</label>
+        <label className={styles.head}>Password</label>
         <input
           type="password"
           name="password"
@@ -84,7 +83,7 @@ const StudentSignup = () => {
           required
         />
 
-        <label>Confirm Password</label>
+        <label className={styles.head}>Confirm Password</label>
         <input
           type="password"
           name="confirmPassword"
@@ -94,8 +93,8 @@ const StudentSignup = () => {
           required
         />
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {success && <p className={styles.success}>{success}</p>}
 
         <button type="submit">Register</button>
       </form>

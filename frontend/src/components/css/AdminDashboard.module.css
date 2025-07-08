@@ -1,6 +1,3 @@
-/* AdminDashboard.css */
-
-/* Admin Dashboard Container */
 .dashboard {
   display: flex;
   height: 100vh;
@@ -37,6 +34,7 @@
   text-shadow: 0 0 12px #82aaff88;
 }
 
+/* Nav Links */
 .navLink {
   display: block;
   text-decoration: none;
@@ -49,130 +47,19 @@
   transition: background 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-.navLink:hover,
+/* Hover effect */
+.navLink:hover {
+  background: #3f8ac4 ;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1) ,
+              inset 0 0 10px rgba(63, 138, 196, 0.1) ;
+}
+
+/* Active link styles */
 .activeNavLink {
-  background: #4a5aff;
+  background: #3f8ac4 ;
   color: #fff;
-  box-shadow: 0 4px 15px rgba(74, 90, 255, 0.7),
-              inset 0 0 10px rgba(74, 90, 255, 0.6);
+  border: 2px solid rgba(63, 138, 196, 0.1) ; /* Purple border for active link */
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1) ,
+              inset 0 0 10px rgba(63, 138, 196, 0.1) ;
 }
-
-/* .sidebar nav a {
-  display: block;
-  text-decoration: none;
-  padding: 12px 18px;
-  font-size: 1.05rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-  color: #a8b5ff;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-} */
-
-.dashboard-nav-link:hover,
-.dashboard-nav-link--active {
-  background: #4a5aff;
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(74, 90, 255, 0.7),
-              inset 0 0 10px rgba(74, 90, 255, 0.6);
-}
-
-/* Main Content */
-.admin-dashboard__main {
-  flex-grow: 1;
-  padding: 3rem 4rem;
-  background: linear-gradient(145deg, #1b1f38, #2a2e53);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  box-shadow: inset 0 0 40px #141a39;
-  border-radius: 0 1rem 1rem 0;
-}
-
-/* Header */
-.admin-dashboard__main header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
-}
-
-.admin-dashboard__main header h1 {
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: #82aaff;
-  text-shadow: 0 0 12px #82aaffaa;
-}
-
-.admin-dashboard__main header button {
-  background: #5360ff;
-  border: none;
-  padding: 10px 22px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 0 0 15px #5360ffcc, 0 4px 20px #5360ffbb;
-  transition: all 0.35s ease;
-}
-
-.admin-dashboard__main header button:hover {
-  background: #4051d4;
-  box-shadow: 0 0 25px #4051d4ee, 0 6px 30px #4051d4cc;
-  transform: translateY(-2px);
-}
-
-/* Dashboard Cards */
-.admin-dashboard__cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
-.admin-dashboard__cards {
-  background: linear-gradient(135deg, #3c44b1, #161f5c);
-  padding: 2rem 1.8rem;
-  border-radius: 18px;
-  color: #c4cdfa;
-  box-shadow: 0 10px 30px rgba(23, 30, 102, 0.9), inset 0 0 20px #6274ff88;
-  transition: all 0.35s ease;
-}
-
-.admin-dashboard__cards:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(23, 30, 102, 1), inset 0 0 30px #91a4ffcc;
-}
-
-.admin-dashboard__cards h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 8px #91a4ffcc;
-}
-
-.admin-dashboard__cards p {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #dbe1ff;
-  text-shadow: 0 0 10px #aab8ffdd;
-}
-
-/* Scrollbar */
-.admin-main-content::-webkit-scrollbar {
-  width: 10px;
-}
-
-.admin-main-content::-webkit-scrollbar-track {
-  background: #141a39;
-}
-
-.admin-main-content::-webkit-scrollbar-thumb {
-  background: #5360ff;
-  border-radius: 10px;
-}
-
-.admin-dashboard__main::-webkit-scrollbar-thumb:hover {
-  background: #4051d4;
-}
-

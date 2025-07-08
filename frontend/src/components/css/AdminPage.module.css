@@ -1,0 +1,82 @@
+/* Global styling for all elements */
+* {
+  user-select: none;
+}
+
+/* Container for the Admin Login */
+.adminLogin {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: #3f8ac4;
+  border-radius: 10px;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); */
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 250px;
+}
+
+/* Heading styling */
+.adminLogin h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 25px;
+}
+
+/* Label styling */
+.loginForm label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Input field styling */
+.loginForm input {
+
+   width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Rounded inputs */
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #333; /* Text color inside the input box */
+  background-color: #f0f8ff; /* Light blue background color for input */
+  transition: all 0.3s ease; /* Smooth transition for focus effects */
+
+}
+.loginForm input:focus {
+  border: 1px solid #6ab7ff; /* Light blue border on focus */
+  background-color: #e6f7ff; /* Light blue background when focused */
+  outline: none; /* Remove the default outline */
+}
+
+/* Button styling */
+.loginForm button {
+  width: 100%;
+  padding: 10px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.loginForm button:hover {
+  background-color: #002a5e;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.head
+{
+  color: white;
+}

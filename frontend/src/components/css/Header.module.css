@@ -1,0 +1,28 @@
+/* src/components/css/Header.module.css */
+.header {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.header h1 {
+  position: absolute; /* Keeps it positioned relative to the header */
+  top: 30px; /* Adjusted distance from the top */
+  left: 50%;
+  transform: translateX(-50%); /* Centers horizontally */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 1000;
+  letter-spacing: 0.5px;
+  color: #fff; /* White color for the header */
+}
+
+.header h2 {
+  position: absolute; /* Keeps it positioned relative to the header */
+  top: 150px; /* Adjusted to be closer to the Access Card */
+  left: 50%;
+  transform: translateX(-50%); /* Centers horizontally */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 1000;
+  letter-spacing: 0.5px;
+  color: #fff; /* White color for the subheader */
+}
