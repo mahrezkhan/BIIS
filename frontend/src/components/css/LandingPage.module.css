@@ -1,4 +1,8 @@
 /* Container for the landing page */
+body {
+  font-family: Arial, sans-serif;
+}
+
 .landingContainer {
   display: flex;
   flex-direction: column;

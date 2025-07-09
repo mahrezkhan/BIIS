@@ -1,4 +1,8 @@
 /* Individual card styling */
+body {
+  font-family: Arial, sans-serif;
+}
+
 .card {
   background-color: #3f8ac4;
   padding: 30px; /* Increased padding for more space inside */
