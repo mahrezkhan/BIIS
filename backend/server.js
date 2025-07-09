@@ -23,10 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/api/admin/verify', (req, res, next) => {
-//   console.log('Middleware hit');
-//   next();  // Continue to the actual route handler
-// });
 
 
 app.get('/', (req, res) => {
@@ -41,24 +37,26 @@ app.use('/api', require('./routes/protected'));      // JWT-protected demo route
 // app.use('/api/teacher',teacherRoutes);
 // app.use('/api/admin', adminRoutes);     // verify, pending users
 //student
-app.use('/api/student/available-courses',require('./routes/student/available-courses'));
-app.use('/api/student/edit-profile',require('./routes/student/edit-profile'));
-app.use('/api/student/enroll',require('./routes/student/enroll'));
-app.use('/api/student/profile',require('./routes/student/profile'));
+app.use('/api/student',require('./routes/student/available-courses'));
+app.use('/api/student',require('./routes/student/edit-profile'));
+app.use('/api/student',require('./routes/student/enroll'));
+app.use('/api/student',require('./routes/student/profile'));
 
 //teacher
-app.use('/api/teacher/view-enrollment-requests',require('./routes/teacher/view-enrollment-requests'));
-app.use('/api/teacher/approve-enrollment',require('./routes/teacher/approve-enrollment'));
+app.use('/api/teacher',require('./routes/teacher/view-enrollment-requests'));
+app.use('/api/teacher',require('./routes/teacher/approve-enrollment'));
 
 //admin
-app.use('/api/admin/add-course', require('./routes/admin/add-course'));     
-app.use('/api/admin/add-student', require('./routes/admin/add-student'));     
-app.use('/api/admin/add-teacher', require('./routes/admin/add-teacher'));     
-app.use('/api/admin/courses', require('./routes/admin/courses'));     
-app.use('/api/admin/drop-course', require('./routes/admin/drop-course'));     
-app.use('/api/admin/verify', require('./routes/admin/verify'));     
-app.use('/api/admin/pending-students', require('./routes/admin/pending-users'));     
-app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));     
+app.use('/api/admin', require('./routes/admin/add-course'));     
+app.use('/api/admin', require('./routes/admin/add-student'));     
+app.use('/api/admin', require('./routes/admin/add-teacher'));     
+app.use('/api/admin', require('./routes/admin/courses'));     
+app.use('/api/admin', require('./routes/admin/drop-course'));   
+app.use('/api/admin', require('./routes/admin/pending-users'));       
+app.use('/api/admin', require('./routes/admin/verify'));     
+
+//app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
+
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
