@@ -8,6 +8,7 @@
   width: 300px; /* Adjusted width for bigger cards */
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Ensure padding and border do not affect the width */
 }
 
 /* Hover effect on cards */

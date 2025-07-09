@@ -5,9 +5,11 @@
   align-items: center;  /* Center horizontally */
   justify-content: center;  /* Center vertically */
   height: 100vh;  /* Full viewport height */
-  background-color: #004080;
+  background-color: #004080; /* Set the background color */
   text-align: center;
   position: relative;
+  padding: 20px; /* Added padding to ensure the content doesn’t touch edges */
+  box-sizing: border-box; /* Ensure padding doesn’t break the layout */
 }
 
 /* Positioning "BUET" at top-left but slightly to the right */
@@ -27,6 +29,7 @@
   color: white;
   font-weight: bold;
   margin-bottom: 50px; /* Reduced margin-bottom to bring closer to cards */
+  margin-top: 20px;  /* Added space between the title and the message */
 }
 
 /* Access Cards container */
@@ -35,5 +38,7 @@
   justify-content: center;  /* Center cards horizontally */
   gap: 20px;
   flex-wrap: wrap;
-  margin-top: 0;  /* Removed negative margin */
+  margin-top: 20px;  /* Adjusted margin-top */
+  width: 100%; /* Make sure the cards container uses full width */
+  box-sizing: border-box; /* Adjust for padding */
 }
