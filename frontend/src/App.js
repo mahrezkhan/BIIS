@@ -7,7 +7,8 @@ import AdminDashboard from './components/AdminDashboard';
 import A from './components/A';
 import StudentSignup from "./components/StudentSignup";
 import TeacherSignup from "./components/TeacherSignup";
-import StudentDashboard from "./components/StudentDashboard";
+import Student from "./components/Student";
+import MyProfile from './components/MyProfile';
 import "./index.css";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/teacher/signin" element={<TeacherPage />} />
           <Route path="/student/signin" element={<StudentPage />} />
-          <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/student" element={<Student />} />
+          <Route path="/student/myprofile" element={<MyProfile />} />
           <Route path="/admin/signin" element={<AdminPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/a" element={<A />} />
