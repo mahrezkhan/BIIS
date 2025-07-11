@@ -30,8 +30,10 @@ if (!validTypes.includes(user_type.toLowerCase())) {
   try {
     const check = await pool.query("SELECT * FROM LOGIN WHERE login_id = $1", [login_id]);
     if (check.rows.length > 0) {
-      return res.status(400).json({ message: 'ID already exists or pending approval' });
+      if(check.rows[0].status==='approved') return res.status(400).json({ message: 'ID already signed up' });
+      else return res.status(400).json({ message: 'Sign up request already in queue' });
     }
+
 
     const hashedPassword = await bcrypt.hash(password, 10);
     await pool.query(

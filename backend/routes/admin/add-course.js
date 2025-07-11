@@ -4,8 +4,9 @@ const router = express.Router();
 const pool = require('../../db/db');
 // POST /api/admin/add-course
 router.post('/add-course', async (req, res) => {
+  console.log("Request Body:", req.body);  // Log the incoming request body to check
   const { course_id, department_id, level_term_id, title, credit } = req.body;
-
+  console.log("Received course_id:", course_id);  // Check if this prints properly
   // Validate input
   if (!course_id || !department_id || !level_term_id || !title || !credit) {
     return res.status(400).json({ message: 'All fields are required' });
