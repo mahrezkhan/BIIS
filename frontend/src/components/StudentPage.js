@@ -24,9 +24,10 @@ const StudentPage = () => {
       console.log(response.data.message);
       // Save token to localStorage
       localStorage.setItem('token', token);
-
+      console.log('Saving StudentId to localStorage:', StudentId);
+      localStorage.setItem('login_id', StudentId); 
       // Redirect to student dashboard
-      navigate('/student/dashboard');
+      navigate('/student/');
     } catch (err) {
       // If the backend sends an error response (like 400, 401, 403)
       if (err.response && err.response.data && err.response.data.message) {

@@ -1,35 +1,13 @@
 // src/components/StudentDashboard.js
-import { useState, useEffect, useRef } from "react";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import styles from './css/Student.module.css';
 
 const Student = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  // const navigate = useNavigate();
-  const menuRef = useRef(null);
+  // const navigate = useNavigate();;
   const location = useLocation();
-  // const handleProfileClick = () => {
-  //   setShowMenu(false);
-  //   navigate("/student/profile");
-  // };
 
   // Close dropdown if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(false);
-      }
-    };
-    if (showMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showMenu]);
 
   return (
       <div className={styles.dashboard}>
