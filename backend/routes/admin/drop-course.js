@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
+const authenticateToken = require('../../middleware/auth');
 // POST /api/admin/drop-course
-router.post('/drop-course', async (req, res) => {
+router.post('/drop-course',authenticateToken, async (req, res) => {
   const { course_id } = req.body;
 
   try {
+    // Check if the user is an admin (assuming `req.user` is set after authentication)
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to perform this action' });
+    }
+
     // Check if the course exists
     const courseCheck = await pool.query('SELECT 1 FROM course WHERE course_id = $1', [course_id]);
     if (courseCheck.rowCount === 0) {

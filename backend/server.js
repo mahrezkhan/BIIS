@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
-  console.log(`Received request: ${req.method} ${req.originalUrl}`);
+  //console.log(`Received request: ${req.method} ${req.originalUrl}`);
   next();
 });
 
@@ -53,7 +53,8 @@ app.use('/api/admin', require('./routes/admin/add-teacher'));
 app.use('/api/admin', require('./routes/admin/courses'));     
 app.use('/api/admin', require('./routes/admin/drop-course'));   
 app.use('/api/admin', require('./routes/admin/pending-users'));       
-app.use('/api/admin', require('./routes/admin/verify'));     
+app.use('/api/admin', require('./routes/admin/verify'));   
+app.use('/api/admin', require('./routes/admin/send-notice-with-file'));   
 
 //app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
 

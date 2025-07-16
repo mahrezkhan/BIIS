@@ -18,7 +18,7 @@ router.get("/profile", authenticateToken, async (req, res) => {
        h.hall_name AS Hall ,t.name AS "Advisor Name", 
        s.birth_registration_no AS "Birth Registration No", s.birth_date AS "Birth Date", s.nid NID,
        s.bank_account_number, s.email, s.district, s.upazilla,
-       s.additional_address, s.contact_person_name, s.contact_person_address, s.contact_person_mobile_number
+       s.additional_address, s.contact_person_name, s.contact_person_address, s.contact_person_mobile_number,s.mobile_number
        FROM student s
        LEFT JOIN level_term lt ON s.level_term_id=lt.level_term_id
        LEFT JOIN department d on s.department_id=d.department_id

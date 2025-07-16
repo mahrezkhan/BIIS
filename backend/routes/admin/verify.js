@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
-
+const authenticateToken = require("../../middleware/auth");
 
 
 
@@ -22,7 +22,7 @@ const pool = require('../../db/db');
 
 
 // approve or reject
-router.post('/verify', async (req, res) => {
+router.post('/verify',authenticateToken, async (req, res) => {
     console.log('Verify route hit'); 
   const { login_id, action } = req.body;
   

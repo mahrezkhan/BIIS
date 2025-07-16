@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
-
+const authenticateToken = require("../../middleware/auth");
 //add teacher 
-router.post('/add-teacher', async (req, res) => {
+router.post('/add-teacher', authenticateToken,async (req, res) => {
   const { login_id, department_id, name, email, phone_number } = req.body;
 
   if (!login_id || !department_id) {
@@ -11,6 +11,11 @@ router.post('/add-teacher', async (req, res) => {
   }
 
   try {
+    // Check if the user is an admin (assuming `req.user` is set after authentication)
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to perform this action' });
+    }
+
     const loginCheck = await pool.query(
       'SELECT user_type FROM login WHERE login_id = $1',
       [login_id]

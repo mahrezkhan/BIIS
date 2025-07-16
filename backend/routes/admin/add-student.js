@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
-
+const authenticateToken = require("../../middleware/auth");
 // Add student basic data before approval
-router.post('/add-student', async (req, res) => {
+router.post('/add-student', authenticateToken,async (req, res) => {
   const { login_id, level_term_id, department_id, hall_id, advisor_id } = req.body;
 
   try {
+    // Check if the user is an admin (assuming `req.user` is set after authentication)
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to perform this action' });
+    }
+
     // 1. Check if login_id exists and is a student
     const loginCheck = await pool.query(
       'SELECT user_type FROM login WHERE login_id = $1',
