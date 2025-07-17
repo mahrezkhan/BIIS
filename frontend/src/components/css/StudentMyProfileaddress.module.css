@@ -1,10 +1,17 @@
-/* Dashboard Container */
+/* Global Styles */
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8; /* Soft background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Dashboard Layout */
 .dashboard {
   display: flex;
   height: 100vh;
-  overflow: hidden;
-  background-color: #004080;
-  color: #e0e6f8;
+  background-color: #f0f4f8;
+  color: #003d6f;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -64,33 +71,53 @@
 .profileContent {
   flex: 1;
   padding: 3rem;
-  background-color: #e0e6f8;
+  background-color: #ffffff; /* Soft white background */
   color: #003d6f;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-left: 3rem;
-  margin-left: 0px;  /* Adjusted to account for sidebar */
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin-left: 2rem; /* Space for sidebar */
+  max-width: 70%; /* Prevent content from stretching too wide */
+  margin-top: 2rem;
 }
 
 /* Profile Section */
 .profileSection {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .profileSection h3 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #004080;
   margin-bottom: 1rem;
+  text-align: left;
+  border-bottom: 3px solid #004080; /* Added border for emphasis */
+  padding-bottom: 10px;
 }
 
+/* Personal Info Styling */
 .personalInfo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  width: 100%;
+  background-color: #f8f9fa; /* Light background */
+  padding: 25px;
+  border-radius: 12px; /* Rounded corners for the profile container */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
+.personalInfo:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Info Fields Styling */
 .infoField {
   display: flex;
   flex-direction: column;
@@ -103,18 +130,25 @@
 }
 
 .infoField input {
-  padding: 10px;
+  padding: 12px;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #f5f5f5;
   color: #003d6f;
   width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.infoField input:focus {
+  border: 1px solid #004080;
+  background-color: #e6f2ff; /* Light blue background on focus */
+  outline: none;
 }
 
 /* Button styling for editing */
 .editBtn {
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 1.1rem;
   background-color: #004080;
   color: white;
@@ -123,6 +157,7 @@
   cursor: pointer;
   margin-top: 2rem;
   transition: background-color 0.3s;
+  align-self: flex-start;
 }
 
 .editBtn:hover {

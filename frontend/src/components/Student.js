@@ -15,9 +15,9 @@ const Student = () => {
           <h2 className={styles.sidebartitle}>Student Portal</h2>
           <nav>
             <a
-              href="/student/myprofile"
+              href="/student/myprofile/personalinformation"
               className={
-                location.pathname === '/student/myprofile'
+                location.pathname === '/student/myprofile/personalinformation'
                   ? `${styles.navLink} ${styles.activeNavLink}`
                   : styles.navLink
               }

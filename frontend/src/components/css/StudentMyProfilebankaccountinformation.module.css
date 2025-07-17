@@ -1,0 +1,165 @@
+/* Global Styles */
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8; /* Soft background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f4f8;
+  color: #003d6f;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #003366;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 280px;
+}
+
+.sidebartitle {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 12px #82aaff88;
+}
+
+/* Navigation Links */
+.navLink {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 2px solid white;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.navLink:hover {
+  background: #3f8ac4;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+  border: 2px solid #3f8ac4;
+}
+
+.activeNavLink {
+  background: #3f8ac4;
+  color: #fff;
+  border: 2px solid rgba(63, 138, 196, 0.1);
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+}
+
+/* Profile Content Section */
+.profileContent {
+  flex: 1;
+  padding: 3rem;
+  background-color: #ffffff; /* Soft white background */
+  color: #003d6f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin-left: 2rem; /* Space for sidebar */
+  max-width: 70%; /* Prevent content from stretching too wide */
+  margin-top: 2rem;
+}
+
+/* Profile Section */
+.profileSection {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.profileSection h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #004080;
+  margin-bottom: 1rem;
+  text-align: left;
+  border-bottom: 3px solid #004080; /* Added border for emphasis */
+  padding-bottom: 10px;
+}
+
+/* Personal Info Styling */
+.personalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  background-color: #f8f9fa; /* Light background */
+  padding: 25px;
+  border-radius: 12px; /* Rounded corners for the profile container */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.personalInfo:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Info Fields Styling */
+.infoField {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoField label {
+  font-size: 1rem;
+  color: #003d6f;
+  font-weight: 600;
+}
+
+.infoField input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  color: #003d6f;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.infoField input:focus {
+  border: 1px solid #004080;
+  background-color: #e6f2ff; /* Light blue background on focus */
+  outline: none;
+}
+
+/* Button styling for editing */
+.editBtn {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+}
+
+.editBtn:hover {
+  background-color: #002a5e;
+}

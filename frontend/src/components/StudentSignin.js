@@ -1,9 +1,9 @@
-import styles from './css/StudentPage.module.css'; // Import the module CSS
+import styles from './css/StudentSignin.module.css'; // Import the module CSS
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axiosInstance';
 
-const StudentPage = () => {
+const StudentSignin = () => {
   const [StudentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -73,4 +73,4 @@ const StudentPage = () => {
   );
 };
 
-export default StudentPage;
+export default StudentSignin;
