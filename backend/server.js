@@ -27,6 +27,7 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
   res.send('Server is working');
+  
 });
 
 // Routes
@@ -45,6 +46,9 @@ app.use('/api/student',require('./routes/student/profile'));
 //teacher
 app.use('/api/teacher',require('./routes/teacher/view-enrollment-requests'));
 app.use('/api/teacher',require('./routes/teacher/approve-enrollment'));
+app.use('/api/teacher',require('./routes/teacher/my-courses'));
+app.use('/api/teacher',require('./routes/teacher/courseId-student'));
+app.use('/api/teacher',require('./routes/teacher/courseId-add-marks'));
 
 //admin
 app.use('/api/admin', require('./routes/admin/add-course'));     
@@ -55,6 +59,7 @@ app.use('/api/admin', require('./routes/admin/drop-course'));
 app.use('/api/admin', require('./routes/admin/pending-users'));       
 app.use('/api/admin', require('./routes/admin/verify'));   
 app.use('/api/admin', require('./routes/admin/send-notice-with-file'));   
+app.use('/api/admin', require('./routes/admin/assign-teacher'));   
 
 //app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
 
