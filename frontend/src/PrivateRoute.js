@@ -17,9 +17,9 @@ const PrivateRoute = ({ children, roleRequired }) => {
     }
   }
 
-//   if (role !== roleRequired) {
-//     return <Navigate to="/" replace />;
-//   }
+  if (role !== roleRequired) {
+    return <Navigate to="/" replace />;
+  }
 
   return children;
 };

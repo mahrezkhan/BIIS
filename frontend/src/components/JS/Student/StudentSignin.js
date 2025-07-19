@@ -9,7 +9,9 @@ const StudentSignin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); // Track loading state for button
   const navigate = useNavigate();
-
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  localStorage.removeItem("login_id");
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -22,10 +24,11 @@ const StudentSignin = () => {
       });
 
       const { token } = response.data;
-
+      const role = "student";
       // Save the token in localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("login_id", StudentId);
+      localStorage.setItem("role", role);
 
       console.log("Student ID saved:", StudentId);
 
@@ -35,13 +38,12 @@ const StudentSignin = () => {
         navigate("/student/"); // Redirect to the student page
       }, 1000); // Wait for 1 second (1000 ms)
     } catch (err) {
-      
       setTimeout(() => {
         setError(
-        err.response?.data?.message || "Server error. Please try again later."
-      );
+          err.response?.data?.message || "Server error. Please try again later."
+        );
         // Set loading state back to false after 1 second
-        setLoading(false);// Redirect to the student page
+        setLoading(false); // Redirect to the student page
       }, 1000); // If there is an error, reset loading state
     }
   };

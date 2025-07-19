@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const TeacherSignup = () => {
+  localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('login_id');
   const [form, setForm] = useState({
     email: '',
     password: '',

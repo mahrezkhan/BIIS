@@ -17,9 +17,10 @@ import StudentMyProfileemergencycontactperson from './components/JS/Student/Stud
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
 import AdminHome from './components/JS/Admin/AdminHome';
+import AdminPendingStudents from './components/JS/Admin/AdminPendingStudents';
 
 
-//import A from './components/JS/Admin/A';
+import A from './components/JS/Admin/A';
 import "./index.css";
 import PrivateRoute from "./PrivateRoute";
 
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/student/signin" element={<StudentSignin />} />
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/admin/signin" element={<AdminSignin />} />
+          <Route path="/admin/A" element={<A />} />
 
           {/* Private Routes for Students */}
           <Route 
@@ -88,10 +90,18 @@ const App = () => {
 
           {/* Private Routes for Admin */}
           <Route 
-            path="/admin/dashboard" 
+            path="/admin" 
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminHome />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/pendingstudents" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminPendingStudents />
               </PrivateRoute>
             } 
           />

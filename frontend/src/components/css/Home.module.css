@@ -9,7 +9,7 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background-color: #004080;
+  background-color: #f0f4f8;
   color: #e0e6f8;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -71,3 +71,25 @@
 }
 
 
+.logout {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* Ensures the buttons are inline */
+  width: auto; /* Ensures the buttons adjust to their content size */
+  margin: 0 10px; /* Spacing between the buttons */
+  text-align: center;
+  position: fixed;  /* Make it fixed in the viewport */
+  top: 20px;        /* Distance from the top */
+  right: 20px;    /* Distance from the right */
+}
+
+.logout:hover {
+  background-color: #002a5e;
+  transform: scale(1.05);
+}

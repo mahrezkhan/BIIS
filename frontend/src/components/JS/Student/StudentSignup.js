@@ -4,6 +4,9 @@ import axios from '../../../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const StudentSignup = () => {
+  localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('login_id');
   const [form, setForm] = useState({
     email: '',
     studentId: '',
