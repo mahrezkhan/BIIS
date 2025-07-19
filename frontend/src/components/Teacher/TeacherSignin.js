@@ -1,8 +1,8 @@
-import styles from './css/TeacherPage.module.css'; // Import the module CSS
+import styles from '../css/Signin.module.css'; // Import the module CSS
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TeacherPage = () => {
+const TeacherSignin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -14,13 +14,13 @@ const TeacherPage = () => {
   };
 
   return (
-    <div className={styles.teacherLogin}>
+    <div className={styles.Login}>
       <h2>Teacher Portal Login</h2>
       <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <label className={styles.head}>Email:</label>
+        <label className={styles.head}>Teacher ID:</label>
         <input className={styles.loginForm}
-          type="email"
-          placeholder="teacher@buet.ac.bd"
+          type="text"
+          placeholder="X01XXX"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -46,4 +46,4 @@ const TeacherPage = () => {
   );
 };
 
-export default TeacherPage;
+export default TeacherSignin;

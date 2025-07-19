@@ -3,8 +3,13 @@
   user-select: none;
 }
 
-/* Container for the Student Signup */
-.signupContainer {
+/* Apply background to the body for the entire page */
+body {
+  background-color: #004080 ; /* Light blue background for the whole page */
+}
+
+/* Container for the Teacher Signup */
+.SignupContainer {
   max-width: 400px;
   margin: 80px auto;
   padding: 40px;
@@ -12,27 +17,27 @@
   border-radius: 10px;
   /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); */
   font-family: 'Quicksand', sans-serif;
-  margin-top: 250px;
+  margin-top: 250px; /* Adjusted margin-top */
 }
 
 /* Heading styling */
-.signupContainer h2 {
+.SignupContainer h2 {
   text-align: center;
   color: white;
-  margin-bottom: 25px;
+  margin-bottom: 25px; /* Larger font size for heading */
 }
 
 /* Label styling */
-.signupForm label {
+.SignupForm label {
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-weight: 600; /* Soft text color */
 }
 
 /* Input field styling */
-.signupForm input {
-  width: 100%;
+.SignupForm input {
+ width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px; /* Rounded inputs */
@@ -40,17 +45,16 @@
   font-size: 1rem;
   color: #333; /* Text color inside the input box */
   background-color: #f0f8ff; /* Light blue background color for input */
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Smooth transition for focus effects */
 }
-
-.signupForm input:focus {
+.SignupForm input:focus {
   border: 1px solid #6ab7ff; /* Light blue border on focus */
   background-color: #e6f7ff; /* Light blue background when focused */
   outline: none; /* Remove the default outline */
 }
 
 /* Button styling */
-.signupForm button {
+.SignupForm button {
   width: 100%;
   padding: 10px;
   background-color: #004080;
@@ -63,23 +67,10 @@
 }
 
 /* Button hover effect */
-.signupForm button:hover {
- background-color: #002a5e;
+.SignupForm button:hover {
+  background-color: #002a5e;/* Slight elevation */
 }
 
-/* Error message styling */
-.error {
-  color: red;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* Success message styling */
-.success {
-  color: green;
-  margin-top: 10px;
-  font-weight: bold;
-}
 
 .head
 {

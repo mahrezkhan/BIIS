@@ -1,4 +1,4 @@
-import styles from './css/TeacherSignup.module.css';  // Import the module CSS
+import styles from '../css/Signup.module.css';  // Import the module CSS
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
@@ -32,9 +32,9 @@ const TeacherSignup = () => {
   };
 
   return (
-    <div className={styles.teacherSignupContainer}>
+    <div className={styles.SignupContainer}>
       <h2>Create Teacher Account</h2>
-      <form onSubmit={handleSubmit} className={styles.teacherSignupForm}>
+      <form onSubmit={handleSubmit} className={styles.SignupForm}>
 
         <label className={styles.head}>Email</label>
         <input

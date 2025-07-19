@@ -1,9 +1,9 @@
-import styles from './css/AdminPage.module.css';  // Import the module CSS
+import styles from '../css/Signin.module.css';  // Import the module CSS
 import { useState } from 'react';
-import axios from '../api/axiosInstance';
+import axios from '../../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
-const AdminPage = () => {
+const AdminSignin = () => {
   const [form, setForm] = useState({ AdminId: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -40,13 +40,13 @@ const AdminPage = () => {
   };
 
   return (
-    <div className={styles.adminLogin}>
+    <div className={styles.Login}>
       <h2>Admin Login</h2>
       <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <label className={styles.head}>Email:</label>
+        <label className={styles.head}>Admin ID</label>
         <input
           type="text"
-          placeholder="admin@buet.ac.bd"
+          placeholder="123XXX"
           name="AdminId"
           value={form.AdminId}
           onChange={handleChange}
@@ -71,4 +71,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminSignin;

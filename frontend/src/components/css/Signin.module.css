@@ -5,11 +5,11 @@
 
 body
 {
-   background-color: #004080;
+   background-color: #004080 ;
 }
 
 /* Container for the Teacher Login */
-.teacherLogin {
+.Login {
   max-width: 400px;
   margin: 80px auto;
   padding: 40px;
@@ -21,7 +21,7 @@ body
 }
 
 /* Heading styling */
-.teacherLogin h2 {
+.Login h2 {
   text-align: center;
   color: white;
   margin-bottom: 25px;
@@ -92,4 +92,25 @@ body
 .head
 {
   color: white;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

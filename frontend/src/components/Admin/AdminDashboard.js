@@ -1,16 +1,15 @@
-import styles from './css/AdminDashboard.module.css';
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import styles from '../css/AdminDashboard.module.css';
+import {  useLocation } from "react-router-dom";
 
 const AdminDashboard = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogout = () => {
-    // Handle logout logic
-    // localStorage.removeItem("token");
-    // navigate("/admin/login");
-  };
+  // const handleLogout = () => {
+  //   // Handle logout logic
+  //   localStorage.removeItem("token");
+  //   navigate("/admin/login");
+  // };
 
   return (
     <div className={styles.dashboard}>

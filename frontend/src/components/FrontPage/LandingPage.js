@@ -1,6 +1,6 @@
 import React from "react";
 import AccessCard from "./AccessCard"; // Ensure correct import path
-import styles from './css/LandingPage.module.css'; // Import the modular CSS file
+import styles from '../css/LandingPage.module.css'; // Import the modular CSS file
 
 const LandingPage = () => {
   return (

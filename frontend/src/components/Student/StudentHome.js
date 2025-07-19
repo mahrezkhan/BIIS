@@ -1,9 +1,9 @@
 // src/components/StudentDashboard.js
 import { useLocation } from "react-router-dom";
 
-import styles from './css/Student.module.css';
+import styles from '../css/Home.module.css';
 
-const Student = () => {
+const StudentHome = () => {
   // const navigate = useNavigate();;
   const location = useLocation();
 
@@ -51,4 +51,4 @@ const Student = () => {
     );
 };
 
-export default Student;
+export default StudentHome;
