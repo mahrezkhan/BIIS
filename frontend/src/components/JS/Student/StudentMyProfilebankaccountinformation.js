@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../css/MyProfile.module.css";
+import styles from "../../css/MyProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 const StudentMyProfilebankaccountinformation = () => {
   const [profile, setProfile] = useState(null);

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "../css/MyProfile.module.css";
+import axios from "axios"; 
+import styles from "../../css/MyProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-const StudentMyProfileaddress = () => {
+const StudentMyProfileemergencycontactperson = () => {
   const [profile, setProfile] = useState(null);
-  const [initialProfile, setInitialProfile] = useState(null); // To track initial values
+  const [initialProfile, setInitialProfile] = useState(null);
   const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); // Toggle between edit mode and view mode
-  const [isModified, setIsModified] = useState(false); // Track if any changes are made
+  const [isEditing, setIsEditing] = useState(false);
+  const [isModified, setIsModified] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -28,11 +28,7 @@ const StudentMyProfileaddress = () => {
         setProfile(response.data);
         setInitialProfile(response.data);
       } catch (err) {
-        console.error("Error fetching profile:", err);
-        setError(
-          err.response?.data?.message ||
-            "An error occurred while fetching your profile."
-        );
+        setError("An error occurred while fetching your profile.");
       }
     };
 
@@ -47,6 +43,7 @@ const StudentMyProfileaddress = () => {
     setIsEditing(true);
   };
 
+  // Handle save button click
   const handleSave = async () => {
     try {
       await axios.put(
@@ -86,6 +83,7 @@ const StudentMyProfileaddress = () => {
     }
   };
 
+  // Handle discard changes button click
   const handleDiscardChanges = () => {
     setProfile(initialProfile); // Reset profile to initial values
     setIsEditing(false); // Exit edit mode
@@ -105,11 +103,12 @@ const StudentMyProfileaddress = () => {
     setIsModified(true); // Mark the profile as modified when any field is changed
   };
 
+  // Prompt user if they want to navigate away while editing
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       if (isModified) {
         event.preventDefault();
-        event.returnValue = ""; // Display browser's default prompt
+        event.returnValue = ''; // Display browser's default prompt
       }
     };
 
@@ -122,7 +121,8 @@ const StudentMyProfileaddress = () => {
     };
   }, [isModified]);
 
-  // Render error or loading state if profile data is not yet loaded
+
+  // Render loading, error, or profile data
   if (error) {
     return <div className={styles.error}>{error}</div>;
   }
@@ -184,42 +184,44 @@ const StudentMyProfileaddress = () => {
           {/* Add other links as needed */}
         </nav>
       </aside>
-
+      
       <div className={styles.profileContent}>
-        <h2>Address</h2>
+        <h2>Emergency Contact Person</h2>
         <div className={styles.profileSection}>
-          <h3>Residential Address</h3>
+          <h3>Contact Person Information</h3>
           <div className={styles.personalInfo}>
             <div className={styles.infoField}>
-              <label>District</label>
+              <label>Name</label>
               <input
                 type="text"
-                name="district"
-                value={profile.district}
+                name="contact_person_name"
+                value={profile.contact_person_name}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
             </div>
             <div className={styles.infoField}>
-              <label>Upazilla</label>
+              <label>Phone Number</label>
               <input
-                type="text"
-                name="upazilla"
-                value={profile.upazilla}
+                type="email"
+                name="contact_person_mobile_number"
+                value={profile.contact_person_mobile_number}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
             </div>
             <div className={styles.infoField}>
-              <label>Address Line</label>
+              <label>Address</label>
               <input
                 type="text"
-                name="additional_address"
-                value={profile.additional_address}
+                name="contact_person_address"
+                value={profile.contact_person_address}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
             </div>
+            
+            
           </div>
         </div>
 
@@ -239,9 +241,8 @@ const StudentMyProfileaddress = () => {
           </button>
         )}
       </div>
-
     </div>
   );
 };
 
-export default StudentMyProfileaddress;
+export default StudentMyProfileemergencycontactperson;

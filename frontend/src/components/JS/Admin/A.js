@@ -1,4 +1,4 @@
-import '../css/A.css'; 
+import '../../css/A.css'; 
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {

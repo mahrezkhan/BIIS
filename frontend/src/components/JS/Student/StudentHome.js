@@ -1,7 +1,7 @@
 // src/components/StudentDashboard.js
 import { useLocation } from "react-router-dom";
 
-import styles from '../css/Home.module.css';
+import styles from '../../css/Home.module.css';
 
 const StudentHome = () => {
   // const navigate = useNavigate();;

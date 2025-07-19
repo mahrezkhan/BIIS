@@ -1,7 +1,7 @@
-import styles from "../css/Signin.module.css"; // Import the module CSS
+import styles from "../../css/Signin.module.css"; // Import the module CSS
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../../api/axiosInstance";
+import axios from "../../../api/axiosInstance";
 
 const StudentSignin = () => {
   const [StudentId, setStudentId] = useState("");

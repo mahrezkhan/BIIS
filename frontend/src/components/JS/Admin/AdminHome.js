@@ -1,7 +1,7 @@
-import styles from '../css/AdminDashboard.module.css';
+import styles from '../../css/AdminDashboard.module.css';
 import {  useLocation } from "react-router-dom";
 
-const AdminDashboard = () => {
+const AdminHome = () => {
   // const navigate = useNavigate();
   const location = useLocation();
 
@@ -52,4 +52,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AdminHome;

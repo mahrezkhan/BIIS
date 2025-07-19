@@ -1,9 +1,8 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../css/MyProfile.module.css";
+import styles from "../../css/MyProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const StudentMyProfilepersonalinformation = () => {
+const StudentMyProfileaddress = () => {
   const [profile, setProfile] = useState(null);
   const [initialProfile, setInitialProfile] = useState(null); // To track initial values
   const [error, setError] = useState(null);
@@ -17,15 +16,23 @@ const StudentMyProfilepersonalinformation = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/student/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        console.log("hi");
+        const response = await axios.get(
+          "http://localhost:5050/api/student/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Sending token in the header
+            },
+          }
+        );
         setProfile(response.data);
         setInitialProfile(response.data);
       } catch (err) {
-        setError("An error occurred while fetching your profile.");
+        console.error("Error fetching profile:", err);
+        setError(
+          err.response?.data?.message ||
+            "An error occurred while fetching your profile."
+        );
       }
     };
 
@@ -36,12 +43,10 @@ const StudentMyProfilepersonalinformation = () => {
     }
   }, [token]);
 
-  // Handle edit button click
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  // Handle save button click
   const handleSave = async () => {
     try {
       await axios.put(
@@ -81,7 +86,6 @@ const StudentMyProfilepersonalinformation = () => {
     }
   };
 
-  // Handle discard changes button click
   const handleDiscardChanges = () => {
     setProfile(initialProfile); // Reset profile to initial values
     setIsEditing(false); // Exit edit mode
@@ -101,12 +105,11 @@ const StudentMyProfilepersonalinformation = () => {
     setIsModified(true); // Mark the profile as modified when any field is changed
   };
 
-  // Prompt user if they want to navigate away while editing
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       if (isModified) {
         event.preventDefault();
-        event.returnValue = ''; // Display browser's default prompt
+        event.returnValue = ""; // Display browser's default prompt
       }
     };
 
@@ -139,8 +142,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/personalinformation"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Personal Information
           </a>
           <a
@@ -149,8 +151,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/hall"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Hall
           </a>
           <a
@@ -159,8 +160,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/address"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Address
           </a>
           <a
@@ -169,9 +169,8 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/bankaccountinformation"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
-            Bank Account Information
+            }>
+            Bank Account
           </a>
           <a
             href="/student/myprofile/emergencycontactperson"
@@ -179,74 +178,44 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/emergencycontactperson"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Emergency Contact Person
           </a>
+          {/* Add other links as needed */}
         </nav>
       </aside>
 
       <div className={styles.profileContent}>
-        <h2>Personal Information</h2>
+        <h2>Address</h2>
         <div className={styles.profileSection}>
-          <h3>Personal Details</h3>
+          <h3>Residential Address</h3>
           <div className={styles.personalInfo}>
             <div className={styles.infoField}>
-              <label>Full Name</label>
+              <label>District</label>
               <input
                 type="text"
-                name="name"
-                value={profile.name}
+                name="district"
+                value={profile.district}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
             </div>
             <div className={styles.infoField}>
-              <label>Email</label>
+              <label>Upazilla</label>
               <input
-                type="email"
-                name="email"
-                value={profile.email}
+                type="text"
+                name="upazilla"
+                value={profile.upazilla}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
             </div>
             <div className={styles.infoField}>
-              <label>Phone Number</label>
+              <label>Address Line</label>
               <input
                 type="text"
-                name="mobile_number"
-                value={profile.mobile_number}
-                onChange={handleInputChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className={styles.infoField}>
-              <label>Date of Birth</label>
-              <input
-                type="text"
-                name="birth_date"
-                value={profile["Birth Date"] ? profile["Birth Date"].split("T")[0] : ""}
-                onChange={handleInputChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className={styles.infoField}>
-              <label>Birth Registration No</label>
-              <input
-                type="text"
-                name="birth_registration_no"
-                value={profile["Birth Registration No"] || ""}
-                onChange={handleInputChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className={styles.infoField}>
-              <label>NID No</label>
-              <input
-                type="text"
-                name="nid"
-                value={profile["nid"]}
+                name="additional_address"
+                value={profile.additional_address}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
@@ -270,8 +239,9 @@ const StudentMyProfilepersonalinformation = () => {
           </button>
         )}
       </div>
+
     </div>
   );
 };
 
-export default StudentMyProfilepersonalinformation;
+export default StudentMyProfileaddress;
