@@ -77,7 +77,9 @@ const AdminPendingStudents = () => {
         hall_id: hallId, // Assuming hallId is set from the form/input
         advisor_id: advisorId, // Assuming advisorId is set from the form/input
       };
+
       console.log("Sending Approval Data:", approvalData);
+
       // Send the data to the backend to add student info
       const response = await axios.post(
         "http://localhost:5050/api/admin/add-student",
@@ -90,21 +92,26 @@ const AdminPendingStudents = () => {
       );
 
       if (response.status === 200) {
-        // If the student was successfully added, you can proceed with removing from the pending list
-        setPendingStudents(
-          pendingStudents.filter(
+        // Remove the student from the list after approval
+        setPendingStudents((prevPending) =>
+          prevPending.filter(
             (student) => student.login_id !== selectedStudent.login_id
           )
         );
-        setShowModal(false); // Close the modal after the approval is successful
-        alert("Student added successfully!");
+
+  
+        setError(response.data.message);
+        // Optionally, you can close the modal here if necessary
+        // setShowModal(false);
       }
     } catch (err) {
       console.error("Approval Error:", err);
+
+      // If error response exists, show the specific error message
       if (err.response && err.response.data && err.response.data.message) {
-        setError(err.response.data.message); // shows the actual backend message
+        setError(err.response.data.message); // Shows the actual backend error message
       } else {
-        setError("Error approving the student.");
+        setError("Error approving the student."); // Fallback error message
       }
     }
   };
@@ -146,7 +153,7 @@ const AdminPendingStudents = () => {
 
       <div className={styles.adminContainer}>
         <h2>Pending Students</h2>
-        {error && <p className={styles.error}>{error}</p>}
+
         <table className={styles.pendingTable}>
           <thead>
             <tr>
@@ -222,6 +229,7 @@ const AdminPendingStudents = () => {
                 onChange={(e) => setAdvisorId(e.target.value)}
                 required
               />
+              <div>{error && <p className={styles.error}>{error}</p>}</div>
               <div className={styles.modalButtons}>
                 <button type="submit">Approve</button>
                 <button type="button" onClick={() => setShowModal(false)}>
