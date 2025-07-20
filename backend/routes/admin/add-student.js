@@ -90,7 +90,12 @@ router.post('/add-student', authenticateToken,async (req, res) => {
       ]
     );
 
-    res.status(200).json({ message: 'Student added successfully to student table' });
+    // Approve the user
+    await pool.query(
+      'UPDATE login SET status = $1 WHERE login_id = $2',
+      ['approved', login_id]
+    );
+    res.status(200).json({ message: 'Student added successfully to student table and user approved' });
 
   } catch (err) {
     console.error('Error adding student:', err);

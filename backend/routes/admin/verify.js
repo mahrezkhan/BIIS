@@ -83,9 +83,9 @@ router.post('/verify',authenticateToken, async (req, res) => {
 
   // Remove from appropriate table
   if (user_type === 'student') {
-    await pool.query('DELETE FROM student WHERE student_id = $1', [login_id]);
+    await pool.query('DELETE FROM student WHERE login_id = $1', [login_id]);
   } else if (user_type === 'teacher') {
-    await pool.query('DELETE FROM teacher WHERE teacher_id = $1', [login_id]);
+    await pool.query('DELETE FROM teacher WHERE login_id = $1', [login_id]);
   }
 
   // Now remove from login

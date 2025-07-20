@@ -56,6 +56,11 @@ router.post('/add-teacher', authenticateToken,async (req, res) => {
       ]
     );
 
+    // Approve the user
+    await pool.query(
+      'UPDATE login SET status = $1 WHERE login_id = $2',
+      ['approved', login_id]
+    );
     res.status(200).json({ message: 'Teacher added successfully to teacher table' });
 
   } catch (err) {

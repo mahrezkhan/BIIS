@@ -6,7 +6,7 @@ const pool = require("../../db/db");
 const authenticateToken = require("../../middleware/auth");
 
 // POST /api/admin/assign-teacher
-router.post('/assign-teacher', async (req, res) => {
+router.post('/assign-teacher',authenticateToken, async (req, res) => {
   const { course_id, login_id } = req.body;
 
   if (!course_id || !login_id) {
