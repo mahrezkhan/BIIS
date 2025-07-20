@@ -1,12 +1,4 @@
-/* Global Styles */
-body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8; /* Soft background */
-  margin: 0;
-  padding: 0;
-}
 
-/* Dashboard Layout */
 .dashboard {
   display: flex;
   height: 100vh;
@@ -106,12 +98,15 @@ body {
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  background-color: #f8f9fa; /* Light background */
+  background-color: #f8f9fa;
   padding: 25px;
-  border-radius: 12px; /* Rounded corners for the profile container */
+  border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  margin-left: -20px; /* Shift the container left */
 }
+
+
 
 .personalInfo:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -147,19 +142,33 @@ body {
 }
 
 /* Button styling for editing */
+/* Styling for action buttons (Save and Discard) */
 .editBtn {
-  padding: 12px 25px;
-  font-size: 1.1rem;
+  padding: 12px 30px;
+  font-size: 1.2rem;
   background-color: #004080;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 2rem;
-  transition: background-color 0.3s;
-  align-self: flex-start;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* Ensures the buttons are inline */
+  width: auto; /* Ensures the buttons adjust to their content size */
+  margin: 0 10px; /* Spacing between the buttons */
+  text-align: center; /* Center text within the button */
 }
 
+/* Hover effect for buttons */
 .editBtn:hover {
   background-color: #002a5e;
+  transform: scale(1.05); /* Adds a subtle scale effect when hovering */
 }
+
+/* Active button effect (optional) */
+.editBtn:active {
+  transform: scale(1); /* Resets the scale effect when clicked */
+}
+
+
+/* Add this to your existing styles */
+

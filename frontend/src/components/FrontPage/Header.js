@@ -1,5 +1,5 @@
 // src/components/Header.js
-import styles from './css/Header.module.css';  // Import the CSS Module
+import styles from '../css/Header.module.css';  // Import the CSS Module
 
 const Header = () => {
   return (

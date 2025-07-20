@@ -1,9 +1,12 @@
-import styles from './css/StudentSignup.module.css';  // Import the module CSS
+import styles from '../../css/Signup.module.css';  // Import the module CSS
 import { useState } from 'react';
-import axios from '../api/axiosInstance';
+import axios from '../../../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const StudentSignup = () => {
+  localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('login_id');
   const [form, setForm] = useState({
     email: '',
     studentId: '',
@@ -50,9 +53,9 @@ const StudentSignup = () => {
   };
 
   return (
-    <div className={styles.signupContainer}>
+    <div className={styles.SignupContainer}>
       <h2>Create Student Account</h2>
-      <form onSubmit={handleSubmit} className={styles.signupForm}>
+      <form onSubmit={handleSubmit} className={styles.SignupForm}>
         <label className={styles.head}>Student ID</label>
         <input
           type="text"

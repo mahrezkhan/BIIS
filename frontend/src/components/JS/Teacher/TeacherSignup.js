@@ -1,8 +1,11 @@
-import styles from './css/TeacherSignup.module.css';  // Import the module CSS
+import styles from '../../css/Signup.module.css';  // Import the module CSS
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const TeacherSignup = () => {
+  localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('login_id');
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -32,9 +35,9 @@ const TeacherSignup = () => {
   };
 
   return (
-    <div className={styles.teacherSignupContainer}>
+    <div className={styles.SignupContainer}>
       <h2>Create Teacher Account</h2>
-      <form onSubmit={handleSubmit} className={styles.teacherSignupForm}>
+      <form onSubmit={handleSubmit} className={styles.SignupForm}>
 
         <label className={styles.head}>Email</label>
         <input

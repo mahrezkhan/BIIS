@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./css/AccessCard.module.css"; // Import the module CSS
+import styles from "../css/AccessCard.module.css"; // Import the module CSS
 
 const AccessCard = ({ role, onClick }) => {
   let w;

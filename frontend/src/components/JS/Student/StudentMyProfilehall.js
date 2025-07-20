@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Ensure you have axios installed
 //import { useNavigate } from 'react-router-dom';
-import styles from "./css/StudentMyProfilepersonalinformation.module.css";
+import styles from "../../css/MyProfile.module.css";
 import { useLocation } from "react-router-dom";
-const StudentMyProfilebankaccountinformation = () => {
+const StudentMyProfilehall = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
   //const navigate = useNavigate();
@@ -68,6 +68,15 @@ const StudentMyProfilebankaccountinformation = () => {
             Personal Information
           </a>
           <a
+            href="/student/myprofile/hall"
+            className={
+              location.pathname === "/student/myprofile/hall"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Hall
+          </a>
+          <a
             href="/student/myprofile/address"
             className={
               location.pathname === "/student/myprofile/address"
@@ -83,43 +92,51 @@ const StudentMyProfilebankaccountinformation = () => {
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Bank Account Information
+            Bank Account
+          </a>
+          <a
+            href="/student/myprofile/emergencycontactperson"
+            className={
+              location.pathname === "/student/myprofile/emergencycontactperson"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Emergency Contact Person
           </a>
           {/* Add other links as needed */}
         </nav>
       </aside>
 
       <div className={styles.profileContent}>
-        <h2>Bank Account Information</h2>
+        <h2>Hall</h2>
         <div className={styles.profileSection}>
-          <h3>Account Details</h3>
+          <h3>Hall Information</h3>
           <div className={styles.personalInfo}>
             <div className={styles.infoField}>
-              <label>Bank Account No</label>
-              <input type="text" defaultValue={profile.bank_account_number} readOnly />
+              <label>Hall Name</label>
+              <input type="text" defaultValue={profile} readOnly />
+            </div>
+            <div className={styles.infoField}>
+              <label>Supervisor Name</label>
+              <input type="email" defaultValue={profile} readOnly />
+            </div>
+            <div className={styles.infoField}>
+              <label>Phone Number</label>
+              <input type="text" defaultValue={profile} readOnly />
+            </div>
+            <div className={styles.infoField}>
+              <label>Email</label>
+              <input type="text" defaultValue={profile} readOnly />
             </div>
 
-            <div className={styles.infoField}>
-              <label>Mobile Banking Method</label>
-              <input type="text" defaultValue={profile.mobile_banking_method} readOnly />
-            </div>
-            <div className={styles.infoField}>
-              <label>Mobile Banking Account</label>
-              <input
-                type="text"
-                defaultValue={profile.mobile_banking_account}
-                readOnly
-              />
-            </div>
-            
             {/* Add more fields as required */}
           </div>
         </div>
 
-        <button className={styles.editBtn}>Edit Personal Information</button>
+        <button className={styles.editBtn}>Edit Hall Information</button>
       </div>
     </div>
   );
 };
 
-export default StudentMyProfilebankaccountinformation;
+export default StudentMyProfilehall;
