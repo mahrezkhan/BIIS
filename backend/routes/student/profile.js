@@ -11,12 +11,12 @@ router.get("/profile", authenticateToken, async (req, res) => {
   try {
     const result = await pool.query(
       `SELECT
-        s.login_id AS "User ID",s.name AS Name,s.mobile_banking_method,
+        s.login_id AS "User_ID",s.name AS Name,s.mobile_banking_method,
         s.mobile_banking_account,
        ('Level-' || lt.level ||',Term-'|| lt.term) AS "Level/Term",
        d.department_id AS Department,
-       h.hall_name AS Hall ,t.name AS "Advisor Name", 
-       s.birth_registration_no AS "Birth Registration No", s.birth_date AS "Birth Date", s.nid NID,
+       h.hall_name AS Hall ,t.name AS "Advisor_Name", 
+       s.birth_registration_no AS "Birth_Registration_No", s.birth_date AS "Birth_Date", s.nid NID,
        s.bank_account_number, s.email, s.district, s.upazilla,
        s.additional_address, s.contact_person_name, s.contact_person_address, s.contact_person_mobile_number,s.mobile_number
        FROM student s
