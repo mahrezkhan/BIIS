@@ -76,3 +76,14 @@ body {
 {
   color: white;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+.success {
+  color: rgb(0, 255, 0);
+  font-size: 14px;
+  text-align: center;
+}

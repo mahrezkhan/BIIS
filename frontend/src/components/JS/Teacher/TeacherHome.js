@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import styles from "../../css/Home.module.css";
 
-const StudentHome = () => {
+const TeacherHome = () => {
   // const navigate = useNavigate();;
   const location = useLocation();
   const navigate = useNavigate();
@@ -12,30 +12,30 @@ const StudentHome = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("login_id");
-    navigate("/student/signin");
+    navigate("/teacher/signin");
   };
   return (
     <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
-        <h2 className={styles.sidebartitle}>Student Portal</h2>
+        <h2 className={styles.sidebartitle}>Teacher Portal</h2>
         <nav>
           <a
-            href="/student/myprofile/personalinformation"
+            href="/teacher/myprofile/personalinformation"
             className={
-              location.pathname === "/student/myprofile/personalinformation"
+              location.pathname === "/teacher/myprofile/personalinformation"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
             My Profile
           </a>
           <a
-            href="/student/enroll"
+            href="/teacher/enrollmentrequest"
             className={
-              location.pathname === "/student/enroll"
+              location.pathname === "/teacher/enrollmentrequest"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Enroll
+            Enrollment Request
           </a>
           <a
             href="/student/dashboard"
@@ -64,4 +64,4 @@ const StudentHome = () => {
   );
 };
 
-export default StudentHome;
+export default TeacherHome;

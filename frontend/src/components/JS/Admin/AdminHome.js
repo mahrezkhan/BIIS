@@ -15,6 +15,7 @@ const AdminHome = () => {
     navigate("/admin/signin");
   };
   return (
+    
     <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
         <h2 className={styles.sidebartitle}>Admin Portal</h2>
@@ -29,23 +30,33 @@ const AdminHome = () => {
             Pending Students
           </a>
           <a
-            href="/student/dashboard"
+            href="/admin/pendingteachers"
             className={
-              location.pathname === "/student/dashboard"
+              location.pathname === "/admin/pendingteachers"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Users
+            Pending Teachers
           </a>
           <a
-            href="/student/settings"
+            href="/admin/addcourses"
             className={
-              location.pathname === "/student/settings"
+              location.pathname === "/admin/addcourses"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Settings
+            Add Courses
           </a>
+          <a
+            href="/admin/assignteacher"
+            className={
+              location.pathname === "/admin/assignteacher"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Assign Teacher 
+          </a>
+          
         </nav>
       </aside>
       <button className={styles.logout} onClick={handleLogout}>

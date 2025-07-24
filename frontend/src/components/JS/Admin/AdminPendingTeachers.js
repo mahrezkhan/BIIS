@@ -3,43 +3,40 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "../../css/Pending.module.css"; // Create this CSS file as per your design
 
-const AdminPendingStudents = () => {
-  const [pendingStudents, setPendingStudents] = useState([]);
+const AdminPendingTeachers = () => {
+  const [pendingTeachers, setpendingTeachers] = useState([]);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false); // Show/Hide approval modal
-  const [selectedStudent, setSelectedStudent] = useState(null); // Store selected student for approval
-  const [levelTermId, setLevelTermId] = useState("");
+  const [selectedTeacher, setSelectedStudent] = useState(null); // Store selected student for approval
   const [departmentId, setDepartmentId] = useState("");
-  const [hallId, setHallId] = useState("");
-  const [advisorId, setAdvisorId] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPendingStudents = async () => {
+    const fetchpendingTeachers = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5050/api/admin/pending-students",
+          "http://localhost:5050/api/admin/pending-teachers",
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setPendingStudents(response.data);
+        setpendingTeachers(response.data);
       } catch (err) {
         console.error(err);
-        setError("Error fetching pending students.");
+        setError("Error fetching pending teacehrs.");
       }
     };
 
-    fetchPendingStudents();
+    fetchpendingTeachers();
   }, []);
 
   // Handle approve action
-  const handleApprove = (student) => {
-    setSelectedStudent(student); // Set the selected student for approval
+  const handleApprove = (teacher) => {
+    setSelectedStudent(teacher); // Set the selected student for approval
     setShowModal(true); // Show the modal for additional information
   };
 
@@ -47,7 +44,7 @@ const AdminPendingStudents = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5050/api/admin/reject-student/${login_id}`,
+        `http://localhost:5050/api/admin/reject-teacher/${login_id}`,
         {},
         {
           headers: {
@@ -56,12 +53,12 @@ const AdminPendingStudents = () => {
         }
       );
       // Remove the student from the list after rejection
-      setPendingStudents(
-        pendingStudents.filter((student) => student.login_id !== login_id)
+      setpendingTeachers(
+        pendingTeachers.filter((teacher) => teacher.login_id !== login_id)
       );
     } catch (err) {
       console.error(err);
-      setError("Error rejecting the student.");
+      setError("Error rejecting the teacher.");
     }
   };
 
@@ -71,18 +68,15 @@ const AdminPendingStudents = () => {
 
       // Prepare the data for submission
       const approvalData = {
-        login_id: selectedStudent.login_id,
-        level_term_id: levelTermId, // Assuming levelTermId is set from the form/input
+        login_id: selectedTeacher.login_id,
         department_id: departmentId, // Assuming departmentId is set from the form/input
-        hall_id: hallId, // Assuming hallId is set from the form/input
-        advisor_id: advisorId, // Assuming advisorId is set from the form/input
       };
 
       console.log("Sending Approval Data:", approvalData);
 
       // Send the data to the backend to add student info
       const response = await axios.post(
-        "http://localhost:5050/api/admin/add-student",
+        "http://localhost:5050/api/admin/add-teacher",
         approvalData,
         {
           headers: {
@@ -93,9 +87,9 @@ const AdminPendingStudents = () => {
 
       if (response.status === 200) {
         // Remove the student from the list after approval
-        setPendingStudents((prevPending) =>
+        setpendingTeachers((prevPending) =>
           prevPending.filter(
-            (student) => student.login_id !== selectedStudent.login_id
+            (teacher) => teacher.login_id !== selectedTeacher.login_id
           )
         );
 
@@ -110,7 +104,7 @@ const AdminPendingStudents = () => {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message); // Shows the actual backend error message
       } else {
-        setError("Error approving the student."); // Fallback error message
+        setError("Error approving the teacher."); // Fallback error message
       }
     }
   };
@@ -160,34 +154,34 @@ const AdminPendingStudents = () => {
       </aside>
 
       <div className={styles.adminContainer}>
-        <h2>Pending Students</h2>
+        <h2>Pending Teachers</h2>
 
         <table className={styles.pendingTable}>
           <thead>
             <tr>
-              <th>Student ID</th>
+              <th>Teacher ID</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {pendingStudents.length === 0 ? (
+            {pendingTeachers.length === 0 ? (
               <tr>
-                <td colSpan="3">No pending students found.</td>
+                <td colSpan="3">No pending teachers found.</td>
               </tr>
             ) : (
-              pendingStudents.map((student) => (
-                <tr key={student.login_id}>
-                  <td>{student.login_id}</td>
-                  <td>{student.email}</td>
+              pendingTeachers.map((teacher) => (
+                <tr key={teacher.login_id}>
+                  <td>{teacher.login_id}</td>
+                  <td>{teacher.email}</td>
                   <td>
                     <button
-                      onClick={() => handleApprove(student)}
+                      onClick={() => handleApprove(teacher)}
                       className={styles.approveBtn}>
                       Approve
                     </button>
                     <button
-                      onClick={() => handleReject(student.login_id)}
+                      onClick={() => handleReject(teacher.login_id)}
                       className={styles.rejectBtn}>
                       Reject
                     </button>
@@ -203,40 +197,20 @@ const AdminPendingStudents = () => {
       {showModal && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <h2 className={styles.modelh2}>Approve Student</h2>
+            <h2>Approve Teacher</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 submitApproval();
               }}>
-              <label className={styles.modelh2}>Level Term ID:</label>
-              <input
-                type="text"
-                value={levelTermId}
-                onChange={(e) => setLevelTermId(e.target.value)}
-                required
-              />
-              <label className={styles.modelh2}>Department ID:</label>
+              <label>Department ID:</label>
               <input
                 type="text"
                 value={departmentId}
                 onChange={(e) => setDepartmentId(e.target.value)}
                 required
               />
-              <label className={styles.modelh2}>Hall ID:</label>
-              <input
-                type="text"
-                value={hallId}
-                onChange={(e) => setHallId(e.target.value)}
-                required
-              />
-              <label className={styles.modelh2}>Advisor ID:</label>
-              <input
-                type="text"
-                value={advisorId}
-                onChange={(e) => setAdvisorId(e.target.value)}
-                required
-              />
+
               <div>{error && <p className={styles.error}>{error}</p>}</div>
               <div className={styles.modalButtons}>
                 <button type="submit">Approve</button>
@@ -252,4 +226,4 @@ const AdminPendingStudents = () => {
   );
 };
 
-export default AdminPendingStudents;
+export default AdminPendingTeachers;

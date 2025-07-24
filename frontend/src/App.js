@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/FrontPage/LandingPage";
 import TeacherSignin from "./components/JS/Teacher/TeacherSignin";
 import TeacherSignup from "./components/JS/Teacher/TeacherSignup";
+import TeacherHome from "./components/JS/Teacher/TeacherHome";
+import EnrollmentRequest from "./components/JS/Teacher/EnrollmentRequest";
+import TeacherMyProfilepersonalinformation from './components/JS/Teacher/TeacherMyProfilepersonalinformation';
 
 
 import StudentSignin from "./components/JS/Student/StudentSignin";
@@ -13,11 +16,15 @@ import StudentMyProfilehall from './components/JS/Student/StudentMyProfilehall';
 import StudentMyProfileaddress from './components/JS/Student/StudentMyProfileaddress';
 import StudentMyProfilebankaccountinformation from './components/JS/Student/StudentMyProfilebankaccountinformation';
 import StudentMyProfileemergencycontactperson from './components/JS/Student/StudentMyProfileemergencycontactperson';
+import StudentEnrollCourses from './components/JS/Student/StudentEnrollCourses';
 
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
 import AdminHome from './components/JS/Admin/AdminHome';
 import AdminPendingStudents from './components/JS/Admin/AdminPendingStudents';
+import AdminPendingTeachers from './components/JS/Admin/AdminPendingTeachers';
+import AdminAddCourse from './components/JS/Admin/AdminAddCourse';
+import AdminAssignTeacher from './components/JS/Admin/AdminAssignTeacher';
 
 
 import A from './components/JS/Admin/A';
@@ -37,6 +44,33 @@ const App = () => {
           <Route path="/student/signup" element={<StudentSignup />} />
           <Route path="/admin/signin" element={<AdminSignin />} />
           <Route path="/admin/A" element={<A />} />
+
+          {/* Private Routes for Teachers */}
+           <Route 
+            path="/teacher" 
+            element={
+              <PrivateRoute roleRequired="teacher">
+                <TeacherHome />
+              </PrivateRoute>
+            } 
+          />
+           <Route 
+            path="/teacher/myprofile/personalinformation" 
+            element={
+              <PrivateRoute roleRequired="teacher">
+                <TeacherMyProfilepersonalinformation />
+              </PrivateRoute>
+            } 
+          />
+           <Route 
+            path="/teacher/enrollmentrequest" 
+            element={
+              <PrivateRoute roleRequired="teacher">
+                <EnrollmentRequest />
+              </PrivateRoute>
+            } 
+          />
+
 
           {/* Private Routes for Students */}
           <Route 
@@ -88,6 +122,16 @@ const App = () => {
             } 
           />
 
+
+          <Route 
+            path="/student/enroll" 
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentEnrollCourses />
+              </PrivateRoute>
+            } 
+          />
+
           {/* Private Routes for Admin */}
           <Route 
             path="/admin" 
@@ -102,6 +146,30 @@ const App = () => {
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminPendingStudents />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/pendingteachers" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminPendingTeachers />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/addcourses" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminAddCourse />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/assignteacher" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminAssignTeacher />
               </PrivateRoute>
             } 
           />

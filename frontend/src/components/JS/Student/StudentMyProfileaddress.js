@@ -16,7 +16,7 @@ const StudentMyProfileaddress = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        console.log("hi");
+       
         const response = await axios.get(
           "http://localhost:5050/api/student/profile",
           {
