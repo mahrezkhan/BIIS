@@ -5,22 +5,6 @@ const pool = require('../../db/db');
 const authenticateToken = require("../../middleware/auth");
 
 
-
-
-// approve or reject
-// router.post('/verify', async (req, res) => {
-//     console.log('/verify route hit');
-//     res.status(200).json({ message: 'User approved ' });
-// });
-
-// router.post('/verifyy', async (req, res) => {
-//     console.log('/verifyy route hit');
-//     res.status(200).json({ message: 'User  ' });
-// });
-
-
-
-
 // approve or reject
 router.post('/verify',authenticateToken, async (req, res) => {
     console.log('Verify route hit'); 

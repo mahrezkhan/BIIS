@@ -29,15 +29,33 @@ router.post('/approve-enrollment', authenticateToken, async (req, res) => {
       return res.status(403).json({ message: 'You are not the advisor of this student' });
     }
 
-    // Handle the approval/rejection
+    // Step 1: Fetch the current active session
+    const activeSessionResult = await pool.query(
+      'SELECT session_name FROM sessions WHERE is_active = TRUE LIMIT 1'
+    );
+
+    if (activeSessionResult.rowCount === 0) {
+      return res.status(400).json({ message: 'No active session found' });
+    }
+
+    const activeSessionName = activeSessionResult.rows[0].session_name;
+
+    // Step 2: Handle the approval/rejection of the enrollment request
     if (action === 'approve') {
+
       // Simply update the status to 'approved'
       await pool.query(
         'UPDATE enrollment_requests SET status = $1 WHERE enrollment_request_id = $2',
         ['approved', enrollmentRequestId]  // Trigger will handle course enrollment automatically
       );
 
-      res.status(200).json({ message: 'Enrollment approved successfully' });
+      // Update the student's session to the current active session
+      await pool.query(
+        'UPDATE student SET session_name = $1 WHERE login_id = $2',
+        [activeSessionName, studentLoginId]  // Update the session of the student
+      );
+
+      res.status(200).json({ message: 'Enrollment approved and student session updated successfully' });
     } else if (action === 'reject') {
       // Update the enrollment request status to 'rejected'
       await pool.query(

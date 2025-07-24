@@ -1,16 +1,15 @@
-
 const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
 const authenticateToken = require("../../middleware/auth");
+
 // POST /api/admin/add-course
-router.post('/add-course', authenticateToken,async (req, res) => {
-  console.log("Request Body:", req.body);  // Log the incoming request body to check
+router.post('/add-course', authenticateToken, async (req, res) => {
   const { course_id, department_id, level_term_id, title, credit } = req.body;
-  console.log("Received course_id:", course_id);  // Check if this prints properly
+
   // Validate input
   if (!course_id || !department_id || !level_term_id || !title || !credit) {
-    return res.status(400).json({ message: 'All fields are required' });
+    return res.status(400).json({ message: 'All fields (course_id, department_id, level_term_id, title, credit) are required' });
   }
 
   try {
@@ -19,10 +18,19 @@ router.post('/add-course', authenticateToken,async (req, res) => {
       return res.status(403).json({ message: 'You are not authorized to perform this action' });
     }
 
-    // Check if course already exists
-    const existing = await pool.query('SELECT 1 FROM course WHERE course_id = $1', [course_id]);
+    // Get the active session from the database
+    const activeSessionResult = await pool.query('SELECT session_name FROM sessions WHERE is_active = TRUE LIMIT 1');
+
+    if (activeSessionResult.rowCount === 0) {
+      return res.status(400).json({ message: 'No active session found' });
+    }
+
+    const activeSession = activeSessionResult.rows[0].session_name;
+
+    // Check if course already exists for the active session
+    const existing = await pool.query('SELECT 1 FROM course WHERE course_id = $1 AND session_name = $2', [course_id, activeSession]);
     if (existing.rowCount > 0) {
-      return res.status(400).json({ message: 'Course with this ID already exists' });
+      return res.status(400).json({ message: 'Course with this ID already exists in the active session' });
     }
 
     // Validate department
@@ -37,11 +45,11 @@ router.post('/add-course', authenticateToken,async (req, res) => {
       return res.status(400).json({ message: 'Invalid level_term_id' });
     }
 
-    // Insert course
+    // Insert course along with session
     await pool.query(
-      `INSERT INTO course (course_id, department_id, level_term_id, title, credit)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [course_id, department_id, level_term_id, title, credit]
+      `INSERT INTO course (course_id, department_id, level_term_id, title, credit, session_name)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [course_id, department_id, level_term_id, title, credit, activeSession]
     );
 
     res.status(201).json({ message: 'Course added successfully' });
@@ -51,4 +59,5 @@ router.post('/add-course', authenticateToken,async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 module.exports = router;

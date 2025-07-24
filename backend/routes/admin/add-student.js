@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../../db/db');
 const authenticateToken = require("../../middleware/auth");
+
 // Add student basic data before approval
-router.post('/add-student', authenticateToken,async (req, res) => {
+router.post('/add-student', authenticateToken, async (req, res) => {
   const { login_id, level_term_id, department_id, hall_id, advisor_id } = req.body;
 
   try {
@@ -90,16 +91,33 @@ router.post('/add-student', authenticateToken,async (req, res) => {
       ]
     );
 
+    // Step 8: Get the active session and update the student's session
+    // const activeSessionResult = await pool.query('SELECT * FROM get_active_session()'); 
+
+    // if (activeSessionResult.rowCount === 0) {
+    //   return res.status(400).json({ message: 'No active session found' });
+    // }
+
+    // const activeSessionName = activeSessionResult.rows[0].session_name;
+
+    // // Update student's session to the current active session
+    // await pool.query(
+    //   'UPDATE student SET session = $1 WHERE login_id = $2',
+    //   [activeSessionName, login_id]
+    // );
+
     // Approve the user
     await pool.query(
       'UPDATE login SET status = $1 WHERE login_id = $2',
       ['approved', login_id]
     );
-    res.status(200).json({ message: 'Student added successfully to student table and user approved' });
+
+    res.status(200).json({ message: 'Student added successfully to student table, user approved, and session updated' });
 
   } catch (err) {
     console.error('Error adding student:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 module.exports = router;

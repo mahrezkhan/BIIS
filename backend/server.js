@@ -42,6 +42,8 @@ app.use('/api/student',require('./routes/student/available-courses'));
 app.use('/api/student',require('./routes/student/edit-profile'));
 app.use('/api/student',require('./routes/student/enroll'));
 app.use('/api/student',require('./routes/student/profile'));
+app.use('/api/student',require('./routes/admin/send-notice-with-file'));
+
 
 //teacher
 app.use('/api/teacher',require('./routes/teacher/view-enrollment-requests'));
@@ -49,6 +51,7 @@ app.use('/api/teacher',require('./routes/teacher/approve-enrollment'));
 app.use('/api/teacher',require('./routes/teacher/my-courses'));
 app.use('/api/teacher',require('./routes/teacher/courseId-student'));
 app.use('/api/teacher',require('./routes/teacher/courseId-add-marks'));
+app.use('/api/teacher',require('./routes/admin/send-notice-with-file'));
 
 //admin
 app.use('/api/admin', require('./routes/admin/add-course'));     
@@ -60,6 +63,7 @@ app.use('/api/admin', require('./routes/admin/pending-users'));
 app.use('/api/admin', require('./routes/admin/verify'));   
 app.use('/api/admin', require('./routes/admin/send-notice-with-file'));   
 app.use('/api/admin', require('./routes/admin/assign-teacher'));   
+app.use('/api/admin', require('./routes/admin/add-session'));   
 
 //app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
 
