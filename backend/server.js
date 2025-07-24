@@ -43,6 +43,9 @@ app.use('/api/student',require('./routes/student/edit-profile'));
 app.use('/api/student',require('./routes/student/enroll'));
 app.use('/api/student',require('./routes/student/profile'));
 app.use('/api/student',require('./routes/admin/send-notice-with-file'));
+app.use('/api/student',require('./routes/student/pay-fee'));
+app.use('/api/student',require('./routes/student/payment-history'));
+app.use('/api/student',require('./routes/student/unpaid-dues'));
 
 
 //teacher
@@ -64,6 +67,9 @@ app.use('/api/admin', require('./routes/admin/verify'));
 app.use('/api/admin', require('./routes/admin/send-notice-with-file'));   
 app.use('/api/admin', require('./routes/admin/assign-teacher'));   
 app.use('/api/admin', require('./routes/admin/add-session'));   
+app.use('/api/admin', require('./routes/admin/add-fee'));   
+app.use('/api/admin', require('./routes/admin/approve-payment'));   
+app.use('/api/admin', require('./routes/admin/pending-payments'));   
 
 //app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
 
