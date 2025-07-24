@@ -1,0 +1,236 @@
+
+
+/* Dashboard container */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevents horizontal overflow */
+  background-color: #f0f4f8;
+  color: #e0e6f8;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #003366;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 280px;
+}
+
+.sidebartitle {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 12px #82aaff88;
+}
+
+/* Navigation Links */
+.navLink {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 2px solid white;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.navLink:hover {
+  background: #3f8ac4;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+  border: 2px solid #3f8ac4;
+}
+
+/* Active link styles */
+.activeNavLink {
+  background: #3f8ac4;
+  color: #fff;
+  border: 2px solid rgba(63, 138, 196, 0.1);
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+}
+
+/* Admin Container */
+.adminContainer {
+  flex: 1;
+  padding: 3rem;
+  background-color: #ffffff; /* Soft white background */
+  color: #003d6f;
+  display: flex;
+  flex-direction: column;
+  
+  
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin-left: 2rem; /* Space for sidebar */
+  max-width: 70%; /* Prevent content from stretching too wide */
+  margin-top: 2rem; /* Adding space for scroll */
+}
+
+/* Heading styles */
+.adminContainer h2 {
+  font-size: 1.5rem;
+  font-weight: 700; /* Increase font weight for better visibility */
+  color: #003366; /* Darker color for better contrast */
+  margin-bottom: 20px;
+}
+
+/* Pending Students Table */
+.pendingTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px; /* Adds some space between the table and the top */
+  table-layout: fixed; /* Ensures consistent column width */
+}
+
+.pendingTable th,
+.pendingTable td {
+  padding: 12px 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.pendingTable th {
+  background-color: #003366;
+  color: white;
+  font-weight: bold;
+}
+
+.pendingTable td {
+  background-color: #f2f2f2;
+}
+
+.pendingTable tr:hover {
+  background-color: #f1f1f1; /* Hover effect on table rows */
+}
+
+/* Buttons for approve and reject */
+.approveBtn,
+.rejectBtn {
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.approveBtn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.rejectBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.approveBtn:hover {
+  background-color: #45a049;
+  transform: scale(1.05); /* Slightly increase the button size */
+}
+
+.rejectBtn:hover {
+  background-color: #e53935;
+  transform: scale(1.05); /* Slightly increase the button size */
+}
+
+/* Error Message */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 500px;
+}
+
+.modalContent h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.modelh2{
+  color: #000;
+}
+.modalContent form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalContent input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalButtons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modalButtons button:hover {
+  background-color: #3f8ac4;
+  color: white;
+}
+
+.modalButtons button:nth-child(1) {
+  background-color: #4CAF50;
+}
+.modalButtons button:nth-child(1):hover{
+  background-color: #0da812;
+}
+
+.modalButtons button:nth-child(2) {
+  background-color: #f44336;
+}
+.modalButtons button:nth-child(2):hover {
+  background-color: #ef2e20;
+}
+
+
+

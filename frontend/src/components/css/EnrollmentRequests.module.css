@@ -1,0 +1,192 @@
+/* Dashboard container */
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevents horizontal overflow */
+  background-color: #f0f4f8;
+  color: #e0e6f8;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #003366;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 280px;
+}
+
+.sidebartitle {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 12px #82aaff88;
+}
+
+/* Navigation Links */
+.navLink {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 2px solid white;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.navLink:hover {
+  background: #3f8ac4;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+  border: 2px solid #3f8ac4;
+}
+
+/* Active link styles */
+.activeNavLink {
+  background: #3f8ac4;
+  color: #fff;
+  border: 2px solid rgba(63, 138, 196, 0.1);
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+}
+
+.dashboard1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Title for the page */
+.dashboard1 h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 2rem;
+}
+
+/* Table for displaying the requests */
+.requestTable {
+  width: 80%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.requestTable th,
+.requestTable td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.requestTable th {
+  background-color: #003366;
+  color: white;
+  font-weight: 700;
+}
+
+.requestTable td {
+  background-color: #f9f9f9;
+}
+
+.requestTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.requestTable tr:hover {
+  background-color: #e1f0f9; /* Light blue on hover */
+}
+
+.requestTable ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requestTable li {
+  margin: 4px 0;
+}
+
+/* Buttons for approving and rejecting requests */
+button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Approve Button */
+button:nth-child(1) {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button:nth-child(1):hover {
+  background-color: #45a049;
+}
+
+/* Reject Button */
+button:nth-child(2) {
+  background-color: #f44336;
+  color: white;
+}
+
+button:nth-child(2):hover {
+  background-color: #e53935;
+}
+
+/* Error handling */
+.error {
+  color: #ff0000;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* Loading state */
+.loading {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* No data available state */
+.noData {
+  font-size: 1.5rem;
+  color: #888;
+  font-weight: 500;
+  margin-top: 20px;
+}
