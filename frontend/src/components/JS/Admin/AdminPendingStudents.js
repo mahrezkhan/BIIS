@@ -6,6 +6,7 @@ import styles from "../../css/Pending.module.css"; // Create this CSS file as pe
 const AdminPendingStudents = () => {
   const [pendingStudents, setPendingStudents] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState('');
   const [showModal, setShowModal] = useState(false); // Show/Hide approval modal
   const [selectedStudent, setSelectedStudent] = useState(null); // Store selected student for approval
   const [levelTermId, setLevelTermId] = useState("");
@@ -98,8 +99,8 @@ const AdminPendingStudents = () => {
             (student) => student.login_id !== selectedStudent.login_id
           )
         );
-
-        setError(response.data.message);
+        setError("")
+        setSuccess(response.data.message);
         // Optionally, you can close the modal here if necessary
         // setShowModal(false);
       }
@@ -238,6 +239,7 @@ const AdminPendingStudents = () => {
                 required
               />
               <div>{error && <p className={styles.error}>{error}</p>}</div>
+              {success && <p className={styles.success}>{success}</p>}
               <div className={styles.modalButtons}>
                 <button type="submit">Approve</button>
                 <button type="button" onClick={() => setShowModal(false)}>

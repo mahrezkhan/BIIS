@@ -148,7 +148,11 @@
   background-color: #e53935;
   transform: scale(1.05); /* Slightly increase the button size */
 }
-
+.success {
+  color: rgb(0, 255, 0);
+  font-size: 14px;
+  text-align: center;
+}
 /* Error Message */
 .error {
   color: red;

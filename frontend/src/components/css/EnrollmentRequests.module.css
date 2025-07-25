@@ -86,11 +86,10 @@
 
 /* Table for displaying the requests */
 .requestTable {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 30px; /* Adds some space between the table and the top */
+  table-layout: fixed;
 }
 
 .requestTable th,
@@ -175,7 +174,11 @@ button:nth-child(2):hover {
   margin-top: 20px;
   font-weight: 600;
 }
-
+.success {
+  color: rgb(0, 255, 0);
+  font-size: 14px;
+  text-align: center;
+}
 /* Loading state */
 .loading {
   font-size: 1.5rem;

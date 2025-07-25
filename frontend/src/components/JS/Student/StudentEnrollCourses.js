@@ -1,65 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../../css/StudentEnrollCourses.module.css"; // CSS file for your design
-import { useNavigate } from "react-router-dom";
+import styles from "../../css/StudentEnrollCourses.module.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const StudentEnrollCourses = () => {
-  const [courses, setCourses] = useState([]); // Store available courses
-  const [selectedCourses, setSelectedCourses] = useState([]); // Store selected courses
-  const [error, setError] = useState(""); // Error message
-  const [successMessage, setSuccessMessage] = useState(""); // Success message
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [courses, setCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  // Fetch available courses when the component is mounted
+  const location = useLocation();
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         setIsLoading(true);
         const token = localStorage.getItem("token");
-
-        // Send GET request to the backend to fetch available courses
-        const response = await axios.get("http://localhost:5050/api/student/available-courses", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setCourses(response.data); // Set the available courses in state
+        const response = await axios.get(
+          "http://localhost:5050/api/student/available-courses",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setCourses(response.data);
       } catch (err) {
-        setError("Error fetching courses. Please try again later.");
+        //setError("Error fetching courses. Please try again later.");
         console.error(err);
       } finally {
         setIsLoading(false);
       }
     };
-
-    fetchCourses(); // Fetch available courses
+    fetchCourses();
   }, []);
 
-  // Handle course selection/deselection
   const handleCourseSelection = (courseId) => {
     setSelectedCourses((prev) =>
       prev.includes(courseId)
-        ? prev.filter((id) => id !== courseId) // Remove course from selected courses if already selected
-        : [...prev, courseId] // Add course to selected courses
+        ? prev.filter((id) => id !== courseId)
+        : [...prev, courseId]
     );
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (selectedCourses.length === 0) {
       setError("Please select at least one course.");
       return;
     }
-
     try {
-      setError(""); // Clear any previous error message
+      setError("");
       const token = localStorage.getItem("token");
-
-      // Send POST request to the backend to submit the enrollment request
       const response = await axios.post(
         "http://localhost:5050/api/student/enroll",
         { selected_courses: selectedCourses },
@@ -69,10 +61,11 @@ const StudentEnrollCourses = () => {
           },
         }
       );
-
       if (response.status === 200) {
-        setSuccessMessage("Your enrollment request has been submitted for approval.");
-        setSelectedCourses([]); // Clear selected courses after submission
+        setSuccessMessage(
+          "Your enrollment request has been submitted for approval."
+        );
+        setSelectedCourses([]);
       }
     } catch (err) {
       setError("Error submitting enrollment request. Please try again later.");
@@ -82,49 +75,119 @@ const StudentEnrollCourses = () => {
 
   return (
     <div className={styles.dashboard}>
-      <h2>Enroll in Courses</h2>
+      <aside className={styles.sidebar}>
+        <h2 className={styles.sidebartitle}>Student Portal</h2>
+        <nav>
+          <a
+            href="/student/myprofile/personalinformation"
+            className={
+              location.pathname === "/student/myprofile/personalinformation"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            My Profile
+          </a>
+          <a
+            href="/student/enroll"
+            className={
+              location.pathname === "/student/enroll"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Enroll
+          </a>
+          <a
+            href="/student/dashboard"
+            className={
+              location.pathname === "/student/dashboard"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Users
+          </a>
+          <a
+            href="/student/settings"
+            className={
+              location.pathname === "/student/settings"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Settings
+          </a>
+        </nav>
+      </aside>
 
-      <form onSubmit={handleSubmit}>
-        <div className={styles.courseList}>
-          {isLoading ? (
-            <div>Loading available courses...</div>
-          ) : error ? (
-            <div className={styles.error}>{error}</div>
-          ) : (
-            <div>
-              <h3>Select Your Courses</h3>
-              {courses.length === 0 ? (
-                <div>No courses available for you at this moment.</div>
-              ) : (
-                <div>
-                  {courses.map((course) => (
-                    <div key={course.course_id} className={styles.courseItem}>
-                      <input
-                        type="checkbox"
-                        id={`course-${course.course_id}`}
-                        value={course.course_id}
-                        onChange={() => handleCourseSelection(course.course_id)}
-                      />
-                      <label htmlFor={`course-${course.course_id}`}>{course.title}</label>
-                    </div>
-                  ))}
+      <div className={styles.Container}>
+        <h2 className={styles.en}>Enroll in Courses</h2>
+
+        {isLoading ? (
+          <div>Loading available courses...</div>
+        ) : error ? (
+          <div className={styles.error}>{error}</div>
+        ) : (
+          <>
+            {courses.length === 0 ? (
+              <div>No courses available for you at this moment.</div>
+            ) : (
+              <>
+                <div className={styles.tableContainer}>
+                  <table className={styles.pendingTable}>
+                    <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>Course Title</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {courses.map((course) => (
+                        <tr key={course.course_id}>
+                          <td>
+                            <input
+                              type="checkbox"
+                              id={`course-${course.course_id}`}
+                              value={course.course_id}
+                              checked={selectedCourses.includes(
+                                course.course_id
+                              )}
+                              onChange={() =>
+                                handleCourseSelection(course.course_id)
+                              }
+                            />
+                          </td>
+                          <td>
+                            <label htmlFor={`course-${course.course_id}`}>
+                              {course.title}
+                            </label>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className={styles.error}>{error}</div>
-        {successMessage && <div className={styles.success}>{successMessage}</div>}
-
-        <button type="submit" className={styles.submitButton}>
-          Submit Enrollment Request
-        </button>
-      </form>
-
-      <button className={styles.cancelButton} onClick={() => navigate("/student/dashboard")}>
-        Cancel
-      </button>
+                
+                <div className={styles.buttonWrapper}>
+                  <button
+                    type="submit"
+                    className={styles.approveBtn}
+                    onClick={handleSubmit}>
+                    Submit Enrollment
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={() => setSelectedCourses([])}>
+                    Cancel
+                  </button>
+                </div>
+              </>
+            )}
+          </>
+        )}
+        {error && <div className={styles.error}>{error}</div>}
+                {successMessage && (
+                  <div className={styles.success}>{successMessage}</div>
+                )}
+      </div>
     </div>
   );
 };
