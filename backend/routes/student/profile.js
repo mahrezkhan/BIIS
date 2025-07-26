@@ -31,7 +31,7 @@ router.get("/profile", authenticateToken, async (req, res) => {
         s.contact_person_address,
         s.contact_person_mobile_number,
         s.mobile_number,
-        s.session AS "Session"  -- Added session
+        s.session_name AS "Session"  -- Added session
        FROM student s
        LEFT JOIN level_term lt ON s.level_term_id = lt.level_term_id
        LEFT JOIN department d ON s.department_id = d.department_id
