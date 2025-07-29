@@ -66,7 +66,7 @@ const AdminHome = () => {
             Pending Requests
           </a>
           <a
-            href="/admin/redpondedrequests"
+            href="/admin/respondedrequests"
             className={
               location.pathname === "/admin/respondedrequests"
                 ? `${styles.navLink} ${styles.activeNavLink}`

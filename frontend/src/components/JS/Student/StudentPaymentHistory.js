@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../../../api/axiosInstance";
 import styles from "../../css/Table.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
-const StudentNotices = () => {
-  const [notices, setNotices] = useState([]);
+import { useLocation } from "react-router-dom";
+
+const StudentPaymentHistory = () => {
+  const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const token = sessionStorage.getItem("token");
   const location = useLocation();
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
-    const fetchNotices = async () => {
-      setLoading(true);
-      setError("");
+    const fetchPaymentHistory = async () => {
       try {
-        const res = await axios.get("/student/notices", {
+        const response = await axios.get("/student/payment-history", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setNotices(res.data || []);
+        setPayments(response.data.payment_history || []);
+        setError("");
       } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch notices.");
+        setError(
+          err.response?.data?.message || "Failed to fetch payment history"
+        );
+        setPayments([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchNotices();
-  }, [token]);
 
-  const handleDownload = (noticeId) => {
-    // This will open the file download in a new tab
-    window.open(`/api/admin/download-notice/${noticeId}`, "_blank");
-  };
+    fetchPaymentHistory();
+  }, [token]);
 
   return (
     <div className={styles.dashboard}>
@@ -74,15 +73,6 @@ const StudentNotices = () => {
             Dues
           </a>
           <a
-            href="/student/paymenthistory"
-            className={
-              location.pathname === "/student/paymenthistory"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Payment History
-          </a>
-          <a
             href="/student/notices"
             className={
               location.pathname === "/student/notices"
@@ -111,37 +101,48 @@ const StudentNotices = () => {
           </a>
         </nav>
       </aside>
+
       <div className={styles.Container}>
-        <h2>Notices</h2>
+        <h2>Payment History</h2>
+
         <table className={styles.Table}>
           <thead>
             <tr>
+              <th>Due Code</th>
+              <th>Payment Method</th>
+              <th>Transaction ID</th>
+              <th>Amount</th>
+              <th>Status</th>
               <th>Date</th>
-              <th>Title</th>
-              <th>Content</th>
-              <th>File</th>
             </tr>
           </thead>
           <tbody>
-            {notices.length === 0 ? (
+            {payments.length === 0 ? (
               <tr>
-                <td colSpan="4">No notices found.</td>
+                <td colSpan="6" className={styles.noData}>
+                  No payment history found.
+                </td>
               </tr>
             ) : (
-              notices.map((n) => (
-                <tr key={n.notice_id}>
-                  <td>{new Date(n.notice_date).toLocaleDateString()}</td>
-                  <td>{n.title}</td>
-                  <td>{n.content}</td>
+              payments.map((payment, index) => (
+                <tr key={index}>
+                  <td>{payment.due_code}</td>
+                  <td>{payment.payment_method}</td>
+                  <td>{payment.transaction_id}</td>
+                  <td>{payment.amount}</td>
                   <td>
-                    {n.file_path ? (
-                      <button onClick={() => handleDownload(n.notice_id)}>
-                        Download
-                      </button>
-                    ) : (
-                      "No file"
-                    )}
+                    <span
+                      className={`${styles.status} ${
+                        payment.payment_status === "approved"
+                          ? styles.approved
+                          : payment.payment_status === "rejected"
+                          ? styles.rejected
+                          : styles.pending
+                      }`}>
+                      {payment.payment_status}
+                    </span>
                   </td>
+                  <td>{new Date(payment.payment_date).toLocaleString()}</td>
                 </tr>
               ))
             )}
@@ -152,4 +153,4 @@ const StudentNotices = () => {
   );
 };
 
-export default StudentNotices;
+export default StudentPaymentHistory;

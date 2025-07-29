@@ -19,6 +19,7 @@ import StudentMyProfileemergencycontactperson from './components/JS/Student/Stud
 import StudentEnrollCourses from './components/JS/Student/StudentEnrollCourses';
 import StudentViewRequests from './components/JS/Student/StudentViewRequests';
 import StudentDues from './components/JS/Student/StudentDues';
+import StudentPaymentHistory from './components/JS/Student/StudentPaymentHistory';
 import StudentNotices from './components/JS/Student/StudentNotices';
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
@@ -156,6 +157,14 @@ const App = () => {
             } 
           />
           <Route 
+            path="/student/paymenthistory" 
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentPaymentHistory />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
             path="/student/notices" 
             element={
               <PrivateRoute roleRequired="student">
@@ -214,7 +223,7 @@ const App = () => {
             } 
           />
           <Route 
-            path="/admin/redpondedrequests" 
+            path="/admin/respondedrequests" 
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminRespondedRequests />

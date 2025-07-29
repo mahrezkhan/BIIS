@@ -149,7 +149,12 @@ const StudentViewRequests = () => {
             </tr>
           </thead>
           <tbody>
-            {requests.map((req) => (
+            {requests.length === 0 ? (
+              <tr>
+                <td colSpan="6">No pending requests found.</td>
+              </tr>
+            ) : (
+            requests.map((req) => (
               <tr key={req.request_id}>
                 <td>{req.request_id}</td>
                 <td>{req.request_type}</td>
@@ -168,7 +173,7 @@ const StudentViewRequests = () => {
                   )}
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
         <div className={styles.buttonWrapper}>

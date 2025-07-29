@@ -6,7 +6,7 @@ import styles from "../../css/Pending.module.css"; // Create this CSS file as pe
 const AdminPendingStudents = () => {
   const [pendingStudents, setPendingStudents] = useState([]);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState('');
+  const [success, setSuccess] = useState("");
   const [showModal, setShowModal] = useState(false); // Show/Hide approval modal
   const [selectedStudent, setSelectedStudent] = useState(null); // Store selected student for approval
   const [levelTermId, setLevelTermId] = useState("");
@@ -15,11 +15,10 @@ const AdminPendingStudents = () => {
   const [advisorId, setAdvisorId] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
     const fetchPendingStudents = async () => {
       try {
-        const token = sessionStorage.getItem("token");
         console.log("Fetching pending students with token:", token);
         const response = await axios.get(
           "http://localhost:5050/api/admin/pending-students",
@@ -33,7 +32,7 @@ const AdminPendingStudents = () => {
         console.log("Pending Students:", response.data);
       } catch (err) {
         console.error(err);
-        console.log("Pending Students:",err);
+        console.log("Pending Students:", err);
         setError("Error fetching pending students.");
       }
     };
@@ -47,32 +46,45 @@ const AdminPendingStudents = () => {
     setShowModal(true); // Show the modal for additional information
   };
 
+  // Replace the empty handleReject function with:
+
   const handleReject = async (login_id) => {
     try {
       const token = sessionStorage.getItem("token");
-      await axios.put(
-        `http://localhost:5050/api/admin/reject-student/${login_id}`,
-        {},
+
+      const response = await axios.post(
+        "http://localhost:5050/api/admin/verify",
+        {
+          login_id: login_id,
+          action: "reject",
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      // Remove the student from the list after rejection
-      setPendingStudents(
-        pendingStudents.filter((student) => student.login_id !== login_id)
-      );
+
+      if (response.status === 200) {
+        // Remove the rejected student from the list
+        setPendingStudents((prevPending) =>
+          prevPending.filter((student) => student.login_id !== login_id)
+        );
+        setError("");
+        setSuccess("Student rejected successfully.");
+      }
     } catch (err) {
-      console.error(err);
-      setError("Error rejecting the student.");
+      console.error("Rejection Error:", err);
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Error rejecting the student.");
+      }
     }
   };
 
   const submitApproval = async () => {
     try {
-      const token = sessionStorage.getItem("token");
-
       // Prepare the data for submission
       const approvalData = {
         login_id: selectedStudent.login_id,
@@ -102,7 +114,7 @@ const AdminPendingStudents = () => {
             (student) => student.login_id !== selectedStudent.login_id
           )
         );
-        setError("")
+        setError("");
         setSuccess(response.data.message);
         // Optionally, you can close the modal here if necessary
         // setShowModal(false);
@@ -159,6 +171,51 @@ const AdminPendingStudents = () => {
                 : styles.navLink
             }>
             Assign Teacher
+          </a>
+          <a
+            href="/admin/pendingrequests"
+            className={
+              location.pathname === "/admin/pendingrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Pending Requests
+          </a>
+          <a
+            href="/admin/respondedrequests"
+            className={
+              location.pathname === "/admin/respondedrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Responded Requests
+          </a>
+          <a
+            href="/admin/addfee"
+            className={
+              location.pathname === "/admin/addfee"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Add Fee
+          </a>
+          <a
+            href="/admin/pendingpayments"
+            className={
+              location.pathname === "/admin/pendingpayments"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            pending payments
+          </a>
+          <a
+            href="/admin/sendnotices"
+            className={
+              location.pathname === "/admin/sendnotices"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Send Notices
           </a>
         </nav>
       </aside>

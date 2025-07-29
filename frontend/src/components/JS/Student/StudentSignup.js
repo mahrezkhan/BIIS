@@ -30,6 +30,12 @@ const StudentSignup = () => {
       return;
     }
 
+     if (!form.email.endsWith("@buet.ac.bd")) {
+      setError("Please use a BUET email address");
+      return;
+    }
+
+
     try {
       console.log("Submitting signup form...");
       const res = await axios.post("/auth/signup", {

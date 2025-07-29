@@ -165,7 +165,6 @@ const StudentDues = () => {
 
       <div className={styles.Container}>
         <h2>Unpaid Dues</h2>
-        {error && <p className={styles.error}>{error}</p>}
         <table className={styles.Table}>
           <thead>
             <tr>
@@ -178,7 +177,12 @@ const StudentDues = () => {
             </tr>
           </thead>
           <tbody>
-            {dues.map((due) => (
+            {dues.length === 0 ? (
+              <tr>
+                <td colSpan="6">No pending dues found.</td>
+              </tr>
+            ) : (
+            dues.map((due) => (
               <tr key={due.due_code}>
                 <td>{due.due_code}</td>
                 <td>{due.fee_type}</td>
@@ -189,7 +193,7 @@ const StudentDues = () => {
                   <button onClick={() => done(due)}>Pay Fee</button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

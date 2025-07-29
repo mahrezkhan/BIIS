@@ -56,6 +56,15 @@ const StudentHome = () => {
             Dues
           </a>
           <a
+            href="/student/paymenthistory"
+            className={
+              location.pathname === "/student/paymenthistory"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Payment History
+          </a>
+          <a
             href="/student/notices"
             className={
               location.pathname === "/student/notices"

@@ -51,28 +51,29 @@
 .Table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 30px; /* Adds some space between the table and the top */
+  table-layout: fixed; /* Ensures consistent column width */
 }
 
 .Table th,
 .Table td {
-  padding: 12px;
-  text-align: left;
-  border: 1px solid #e0e0e0;
+  padding: 12px 10px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 
 .Table th {
   background-color: #003366;
   color: white;
-  font-weight: 600;
+  font-weight: bold;
 }
 
-.Table tr:nth-child(even) {
-  background-color: #f8f9fa;
+.Table td {
+  background-color: #f2f2f2;
 }
 
 .Table tr:hover {
-  background-color: #f0f4f8;
+  background-color: #f1f1f1; /* Hover effect on table rows */
 }
 
 .modal {

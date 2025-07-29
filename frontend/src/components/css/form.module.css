@@ -7,7 +7,20 @@
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
 }
+.selectInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
 
+.selectInput option {
+  padding: 10px;
+  font-size: 16px;
+}
 /* Sidebar */
 .sidebar {
   width: 260px;

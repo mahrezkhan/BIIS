@@ -6,8 +6,9 @@ import styles from "../../css/Pending.module.css"; // Create this CSS file as pe
 const AdminPendingTeachers = () => {
   const [pendingTeachers, setpendingTeachers] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [showModal, setShowModal] = useState(false); // Show/Hide approval modal
-  const [selectedTeacher, setSelectedStudent] = useState(null); // Store selected student for approval
+  const [selectedTeacher, setSelectedTeacher] = useState(null); // Store selected student for approval
   const [departmentId, setDepartmentId] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,30 +37,45 @@ const token = sessionStorage.getItem("token");
 
   // Handle approve action
   const handleApprove = (teacher) => {
-    setSelectedStudent(teacher); // Set the selected student for approval
+    setSelectedTeacher(teacher); // Set the selected student for approval
     setShowModal(true); // Show the modal for additional information
   };
 
-  const handleReject = async (login_id) => {
-    try {
-      await axios.put(
-        `http://localhost:5050/api/admin/reject-teacher/${login_id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+ const handleReject = async (login_id) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    
+    const response = await axios.post(
+      "http://localhost:5050/api/admin/verify",
+      {
+        login_id: login_id,
+        action: "reject"
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      // Remove the rejected teacher from the list
+      setpendingTeachers((prevPending) =>
+        prevPending.filter((teacher) => teacher.login_id !== login_id)
       );
-      // Remove the student from the list after rejection
-      setpendingTeachers(
-        pendingTeachers.filter((teacher) => teacher.login_id !== login_id)
-      );
-    } catch (err) {
-      console.error(err);
+      setError(""); // Clear any existing errors
+      setSuccess("Teacher rejected successfully."); // Set success message
+    }
+  } catch (err) {
+    console.error("Rejection Error:", err);
+    setSuccess(""); // Clear any existing success message
+    if (err.response?.data?.message) {
+      setError(err.response.data.message);
+    } else {
       setError("Error rejecting the teacher.");
     }
-  };
+  }
+};
 
   const submitApproval = async () => {
     try {
@@ -147,6 +163,51 @@ const token = sessionStorage.getItem("token");
                 : styles.navLink
             }>
             Assign Teacher
+          </a>
+          <a
+            href="/admin/pendingrequests"
+            className={
+              location.pathname === "/admin/pendingrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Pending Requests
+          </a>
+          <a
+            href="/admin/respondedrequests"
+            className={
+              location.pathname === "/admin/respondedrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Responded Requests
+          </a>
+          <a
+            href="/admin/addfee"
+            className={
+              location.pathname === "/admin/addfee"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Add Fee
+          </a>
+          <a
+            href="/admin/pendingpayments"
+            className={
+              location.pathname === "/admin/pendingpayments"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            pending payments
+          </a>
+          <a
+            href="/admin/sendnotices"
+            className={
+              location.pathname === "/admin/sendnotices"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Send Notices
           </a>
         </nav>
       </aside>
