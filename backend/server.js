@@ -48,6 +48,9 @@ app.use('/api/student',require('./routes/student/payment-history'));
 app.use('/api/student',require('./routes/student/unpaid-dues'));
 app.use('/api/student',require('./routes/student/view-requests'));
 app.use('/api/student',require('./routes/student/create-request'));
+app.use('/api/student',require('./routes/student/view-courses'));
+app.use('/api/student',require('./routes/student/view-cgpa-for-level-term'));
+app.use('/api/student',require('./routes/student/view-level-term-for-grade'));
 
 
 //teacher

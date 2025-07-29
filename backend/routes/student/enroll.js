@@ -40,6 +40,19 @@ router.post('/enroll', authenticateToken, async (req, res) => {
 
     const activeSession = sessionResult.rows[0].session_name;
 
+     //Check if there is already a pending enrollment request for the student and session
+    const existingRequest = await pool.query(
+      `SELECT 1 
+       FROM enrollment_requests 
+       WHERE login_id = $1 
+       AND status = 'pending'`,
+      [login_id]
+    );
+
+    if (existingRequest.rowCount > 0) {
+      return res.status(400).json({ message: 'You already have a pending enrollment request for this session' });
+    }
+
     // Step 4: Validate selected courses belong to the student's level_term, department, and current session
     for (const course_id of selected_courses) {
       const course = await pool.query(

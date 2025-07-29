@@ -5,7 +5,7 @@ const authenticateToken = require("../../middleware/auth");
 
 router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
   const { courseId } = req.params;  // Get courseId from route parameter
-  const { student_id, CT_marks, TF_marks, attendance_marks } = req.body;  // Marks input from request body
+  const { student_id, CT_marks, TF_marks, attendance_marks, total_possible_marks } = req.body;  // Marks input from request body
   const teacher_id = req.user.login_id;  // Get teacher's login ID from token
 
   try {
@@ -48,18 +48,20 @@ router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
 
     // Step 4: Insert or update the marks into the marks table
     const result = await pool.query(
-      `INSERT INTO marks (student_id, course_id, CT_marks, TF_marks, attendance_marks, teacher_id)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO marks (student_id, course_id, CT_marks, TF_marks, attendance_marks, total_possible_marks, teacher_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
        ON CONFLICT (student_id, course_id) DO UPDATE
        SET CT_marks = COALESCE(EXCLUDED.CT_marks, marks.CT_marks),
            TF_marks = COALESCE(EXCLUDED.TF_marks, marks.TF_marks),
-           attendance_marks = COALESCE(EXCLUDED.attendance_marks, marks.attendance_marks)`,
+           attendance_marks = COALESCE(EXCLUDED.attendance_marks, marks.attendance_marks),
+           total_possible_marks = COALESCE(EXCLUDED.total_possible_marks, marks.total_possible_marks)`,
       [
         student_id, 
         courseId, 
         CT_marks || null, 
         TF_marks || null, 
         attendance_marks || null, 
+        total_possible_marks || null, 
         teacher_id
       ]
     );
