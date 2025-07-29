@@ -23,7 +23,7 @@ const AdminAssignTeacher = () => {
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     const courseData = {
       course_id: courseId,

@@ -9,9 +9,9 @@ const StudentHome = () => {
   const navigate = useNavigate();
   // Close dropdown if clicked outside
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("login_id");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    sessionStorage.removeItem("login_id");
     navigate("/student/signin");
   };
   return (

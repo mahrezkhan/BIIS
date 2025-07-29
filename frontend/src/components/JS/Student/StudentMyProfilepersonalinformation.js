@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../css/MyProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,19 +11,27 @@ const StudentMyProfilepersonalinformation = () => {
   const [isModified, setIsModified] = useState(false); // Track if any changes are made
   const location = useLocation();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // Fetch user profile from the backend
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/student/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProfile(response.data);
-        setInitialProfile(response.data);
+        const response = await axios.get(
+          "http://localhost:5050/api/student/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const updatedProfile = { ...response.data };
+        if (updatedProfile.birth_date) {
+          updatedProfile.birth_date = updatedProfile.birth_date.split("T")[0]; // Correctly format birth_date
+        }
+        setProfile(updatedProfile);
+        setInitialProfile(updatedProfile);
+        console.log(updatedProfile);
       } catch (err) {
         setError("An error occurred while fetching your profile.");
       }
@@ -56,8 +64,8 @@ const StudentMyProfilepersonalinformation = () => {
           contact_person_name: profile.contact_person_name,
           contact_person_address: profile.contact_person_address,
           contact_person_mobile_number: profile.contact_person_mobile_number,
-          birth_registration_no: profile["Birth Registration No"],
-          birth_date: profile["Birth Date"],
+          birth_registration_no: profile.birth_registration_no,
+          birth_date: profile.birth_date,
           nid: profile.nid,
           bank_account_number: profile.bank_account_number,
           mobile_banking_method: profile.mobile_banking_method,
@@ -91,14 +99,12 @@ const StudentMyProfilepersonalinformation = () => {
   // Handle input field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    // Update only the modified field, and keep the rest of the fields unchanged
+    console.log("Field name:", name, "Value:", value); // Debugging
     setProfile((prevProfile) => ({
-      ...prevProfile, // Spread the previous profile data
-      [name]: value, // Update only the changed field
+      ...prevProfile,
+      [name]: value,
     }));
-
-    setIsModified(true); // Mark the profile as modified when any field is changed
+    setIsModified(true);
   };
 
   // Prompt user if they want to navigate away while editing
@@ -106,7 +112,7 @@ const StudentMyProfilepersonalinformation = () => {
     const handleBeforeUnload = (event) => {
       if (isModified) {
         event.preventDefault();
-        event.returnValue = ''; // Display browser's default prompt
+        event.returnValue = ""; // Display browser's default prompt
       }
     };
 
@@ -127,7 +133,7 @@ const StudentMyProfilepersonalinformation = () => {
   if (!profile) {
     return <div className={styles.loading}>Loading profile...</div>;
   }
-
+  
   return (
     <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
@@ -139,8 +145,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/personalinformation"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Personal Information
           </a>
           <a
@@ -149,8 +154,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/hall"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Hall
           </a>
           <a
@@ -159,8 +163,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/address"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Address
           </a>
           <a
@@ -169,8 +172,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/bankaccountinformation"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Bank Account Information
           </a>
           <a
@@ -179,8 +181,7 @@ const StudentMyProfilepersonalinformation = () => {
               location.pathname === "/student/myprofile/emergencycontactperson"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
-            }
-          >
+            }>
             Emergency Contact Person
           </a>
         </nav>
@@ -224,9 +225,9 @@ const StudentMyProfilepersonalinformation = () => {
             <div className={styles.infoField}>
               <label>Date of Birth</label>
               <input
-                type="text"
+                type="date"
                 name="birth_date"
-                value={profile["Birth Date"] ? profile["Birth Date"].split("T")[0] : ""}
+                value={profile.birth_date}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
@@ -236,7 +237,7 @@ const StudentMyProfilepersonalinformation = () => {
               <input
                 type="text"
                 name="birth_registration_no"
-                value={profile["Birth Registration No"] || ""}
+                value={profile.birth_registration_no}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
@@ -246,7 +247,7 @@ const StudentMyProfilepersonalinformation = () => {
               <input
                 type="text"
                 name="nid"
-                value={profile["nid"]}
+                value={profile.nid}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />

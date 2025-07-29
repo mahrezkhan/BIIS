@@ -10,7 +10,7 @@ const StudentMyProfilehall = () => {
   //const navigate = useNavigate();
   const location = useLocation();
   // Fetching token from localStorage
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   // Check if the token exists, if not, redirect to login
 
   // Fetch user profile from the backend

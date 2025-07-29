@@ -15,7 +15,7 @@ const StudentEnrollCourses = () => {
     const fetchCourses = async () => {
       try {
         setIsLoading(true);
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         const response = await axios.get(
           "http://localhost:5050/api/student/available-courses",
           {

@@ -42,7 +42,7 @@ const AdminPendingTeachers = () => {
 
   const handleReject = async (login_id) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.put(
         `http://localhost:5050/api/admin/reject-teacher/${login_id}`,
         {},

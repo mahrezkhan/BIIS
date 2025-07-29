@@ -9,9 +9,9 @@ const AdminSignin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); // Track loading state for button
   const navigate = useNavigate();
-  localStorage.removeItem("token");
-  localStorage.removeItem("role");
-  localStorage.removeItem("login_id");
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("role");
+  sessionStorage.removeItem("login_id");
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -26,9 +26,9 @@ const AdminSignin = () => {
       const { token } = response.data;
       const role = "admin";
       // Save the token in localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("login_id", AdminId);
-      localStorage.setItem("role", role);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("login_id", AdminId);
+      sessionStorage.setItem("role", role);
 
       console.log("Student ID saved:", AdminId);
 

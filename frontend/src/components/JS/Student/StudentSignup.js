@@ -1,21 +1,21 @@
-import styles from '../../css/Signup.module.css';  // Import the module CSS
-import { useState } from 'react';
-import axios from '../../../api/axiosInstance';
-import { useNavigate } from 'react-router-dom';
+import styles from "../../css/Signup.module.css"; // Import the module CSS
+import { useState } from "react";
+import axios from "../../../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const StudentSignup = () => {
-  localStorage.removeItem('token');
-      localStorage.removeItem('role');
-      localStorage.removeItem('login_id');
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("role");
+  sessionStorage.removeItem("login_id");
   const [form, setForm] = useState({
-    email: '',
-    studentId: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    studentId: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,29 +26,28 @@ const StudentSignup = () => {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     try {
       console.log("Submitting signup form...");
-      const res = await axios.post('/auth/signup', {
+      const res = await axios.post("/auth/signup", {
         login_id: form.studentId,
         email: form.email,
         password: form.password,
-        user_type: 'student'
+        user_type: "student",
       });
       console.log("after signup form...");
-      setError('');
-      setSuccess('Account created successfully!');
-      console.log(res.data); 
+      setError("");
+      setSuccess("Account created successfully!");
+      console.log(res.data);
       // Redirect to login page after short delay
-      setTimeout(() => navigate('/student'), 2000);
-
+      setTimeout(() => navigate("/student"), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Signup failed');
+      setError(err.response?.data?.message || "Signup failed");
       console.log("catch signup form...");
-      setSuccess('');
+      setSuccess("");
     }
   };
 

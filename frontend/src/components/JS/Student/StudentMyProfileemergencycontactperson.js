@@ -10,7 +10,7 @@ const StudentMyProfileemergencycontactperson = () => {
   const [isModified, setIsModified] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // Fetch user profile from the backend
   useEffect(() => {
@@ -58,8 +58,8 @@ const StudentMyProfileemergencycontactperson = () => {
           contact_person_name: profile.contact_person_name,
           contact_person_address: profile.contact_person_address,
           contact_person_mobile_number: profile.contact_person_mobile_number,
-          birth_registration_no: profile["Birth Registration No"],
-          birth_date: profile["Birth Date"],
+          birth_registration_no: profile.birth_registration_no,
+          birth_date: profile.birth_date,
           nid: profile.nid,
           bank_account_number: profile.bank_account_number,
           mobile_banking_method: profile.mobile_banking_method,

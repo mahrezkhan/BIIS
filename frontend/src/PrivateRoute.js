@@ -3,8 +3,8 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children, roleRequired }) => {
-  const token = localStorage.getItem('token');
-  const role = localStorage.getItem('role');
+  const token = sessionStorage.getItem('token');
+  const role = sessionStorage.getItem('role');
   console.log(role);
   console.log(token);
   if (!token) {
