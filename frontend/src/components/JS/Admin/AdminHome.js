@@ -56,6 +56,24 @@ const AdminHome = () => {
             }>
             Assign Teacher 
           </a>
+          <a
+            href="/admin/pendingrequests"
+            className={
+              location.pathname === "/admin/pendingrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Pending Requests
+          </a>
+          <a
+            href="/admin/redpondedrequests"
+            className={
+              location.pathname === "/admin/respondedrequests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Responded Requests
+          </a>
           
         </nav>
       </aside>

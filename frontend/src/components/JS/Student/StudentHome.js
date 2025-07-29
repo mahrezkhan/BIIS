@@ -38,6 +38,15 @@ const StudentHome = () => {
             Enroll
           </a>
           <a
+            href="/student/requests"
+            className={
+              location.pathname === "/student/requests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Request
+          </a>
+          <a
             href="/student/dashboard"
             className={
               location.pathname === "/student/dashboard"

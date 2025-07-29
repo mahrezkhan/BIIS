@@ -17,7 +17,7 @@ import StudentMyProfileaddress from './components/JS/Student/StudentMyProfileadd
 import StudentMyProfilebankaccountinformation from './components/JS/Student/StudentMyProfilebankaccountinformation';
 import StudentMyProfileemergencycontactperson from './components/JS/Student/StudentMyProfileemergencycontactperson';
 import StudentEnrollCourses from './components/JS/Student/StudentEnrollCourses';
-
+import StudentRequests from './components/JS/Student/StudentRequests';
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
 import AdminHome from './components/JS/Admin/AdminHome';
@@ -25,6 +25,9 @@ import AdminPendingStudents from './components/JS/Admin/AdminPendingStudents';
 import AdminPendingTeachers from './components/JS/Admin/AdminPendingTeachers';
 import AdminAddCourse from './components/JS/Admin/AdminAddCourse';
 import AdminAssignTeacher from './components/JS/Admin/AdminAssignTeacher';
+import AdminPendingRequest from './components/JS/Admin/AdminPendingRequest';
+import AdminRespondedRequests from './components/JS/Admin/AdminRespondedRequests';
+
 
 
 import A from './components/JS/Admin/A';
@@ -131,6 +134,14 @@ const App = () => {
               </PrivateRoute>
             } 
           />
+          <Route 
+            path="/student/requests" 
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentRequests />
+              </PrivateRoute>
+            } 
+          />
 
           {/* Private Routes for Admin */}
           <Route 
@@ -170,6 +181,22 @@ const App = () => {
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminAssignTeacher />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/pendingrequests" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminPendingRequest />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/redpondedrequests" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminRespondedRequests />
               </PrivateRoute>
             } 
           />
