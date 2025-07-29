@@ -26,17 +26,17 @@ router.get('/pending-payments', authenticateToken, async (req, res) => {
     if (fee_type === 'registration_fee') {
       query = `
         SELECT * FROM payments 
-        WHERE payment_method = 'registration_fee' AND status = 'pending'
+        WHERE  substr(due_code,1,2) = 'rf' AND status = 'pending'
       `;
     } else if (fee_type === 'dining_fee') {
       query = `
         SELECT * FROM payments 
-        WHERE payment_method = 'dining_fee' AND status = 'pending'
+        WHERE  substr(due_code,1,2) = 'df' AND status = 'pending'
       `;
     } else if (fee_type === 'hall_fee') {
       query = `
         SELECT * FROM payments 
-        WHERE payment_method = 'hall_fee' AND status = 'pending'
+        WHERE  substr(due_code,1,2) = 'hf' AND status = 'pending'
       `;
     } else {
       return res.status(400).json({ message: 'Invalid fee type specified' });

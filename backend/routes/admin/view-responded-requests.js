@@ -13,7 +13,7 @@ router.get('/view-responded-requests', authenticateToken, async (req, res) => {
   try {
     // Step 1: Fetch all responded requests for the admin
     const result = await pool.query(
-      'SELECT * FROM requests WHERE status = $1 ORDER BY request_date DESC',
+      'SELECT r.*,resp.response_content FROM requests r LEFT JOIN responses resp ON r.request_id=resp.request_id  WHERE r.status = $1 ORDER BY r.request_date DESC',
       ['responded']
     );
 
