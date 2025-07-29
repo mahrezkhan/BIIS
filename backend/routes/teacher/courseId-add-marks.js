@@ -8,20 +8,24 @@ router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
   const { student_id, CT_marks, TF_marks, attendance_marks, total_possible_marks } = req.body;  // Marks input from request body
   const teacher_id = req.user.login_id;  // Get teacher's login ID from token
 
+  const client = await pool.connect();  // Get a database client for transaction
   try {
+    await client.query('BEGIN');  // Start the transaction
+
     // Step 1: Get the active session
-    const sessionResult = await pool.query(
+    const sessionResult = await client.query(
       'SELECT session_name FROM sessions WHERE is_active = TRUE'
     );
 
     if (sessionResult.rowCount === 0) {
+      await client.query('ROLLBACK'); // Rollback if no active session found
       return res.status(404).json({ message: 'No active session found' });
     }
 
     const activeSession = sessionResult.rows[0].session_name;
 
     // Step 2: Check if the teacher is assigned to the course for the active session
-    const teacherCourseCheck = await pool.query(
+    const teacherCourseCheck = await client.query(
       `SELECT 1 
        FROM teacher_course tc 
        JOIN course c ON tc.course_id = c.course_id 
@@ -30,11 +34,12 @@ router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
     );
 
     if (teacherCourseCheck.rowCount === 0) {
+      await client.query('ROLLBACK');  // Rollback if teacher is not assigned
       return res.status(403).json({ message: 'You are not assigned to this course for the current session' });
     }
 
     // Step 3: Check if the student is enrolled in the course for the active session
-    const enrollmentCheck = await pool.query(
+    const enrollmentCheck = await client.query(
       `SELECT 1 
        FROM enrollment e
        JOIN course c ON e.course_id = c.course_id 
@@ -43,11 +48,12 @@ router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
     );
 
     if (enrollmentCheck.rowCount === 0) {
+      await client.query('ROLLBACK');  // Rollback if student is not enrolled
       return res.status(400).json({ message: 'Student is not enrolled in this course for the current session' });
     }
 
     // Step 4: Insert or update the marks into the marks table
-    const result = await pool.query(
+    const result = await client.query(
       `INSERT INTO marks (student_id, course_id, CT_marks, TF_marks, attendance_marks, total_possible_marks, teacher_id)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        ON CONFLICT (student_id, course_id) DO UPDATE
@@ -66,10 +72,16 @@ router.post('/:courseId/add-marks', authenticateToken, async (req, res) => {
       ]
     );
 
+    await client.query('COMMIT');  // Commit the transaction
+
     res.status(200).json({ message: 'Marks added successfully' });
+
   } catch (err) {
     console.error('Error adding marks:', err);
+    await client.query('ROLLBACK');  // Rollback the transaction in case of error
     res.status(500).json({ message: 'Server error' });
+  } finally {
+    client.release();  // Release the client back to the pool
   }
 });
 

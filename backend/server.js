@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const pool = require('./db/db');
+const path = require('path');
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 app.get('/', (req, res) => {
@@ -51,6 +54,7 @@ app.use('/api/student',require('./routes/student/create-request'));
 app.use('/api/student',require('./routes/student/view-courses'));
 app.use('/api/student',require('./routes/student/view-cgpa-for-level-term'));
 app.use('/api/student',require('./routes/student/view-level-term-for-grade'));
+app.use('/api/student',require('./routes/student/change-password'));
 
 
 //teacher
@@ -60,6 +64,8 @@ app.use('/api/teacher',require('./routes/teacher/my-courses'));
 app.use('/api/teacher',require('./routes/teacher/courseId-student'));
 app.use('/api/teacher',require('./routes/teacher/courseId-add-marks'));
 app.use('/api/teacher',require('./routes/admin/send-notice-with-file'));
+app.use('/api/teacher',require('./routes/teacher/profile'));
+app.use('/api/teacher',require('./routes/teacher/edit-profile'));
 
 //admin
 app.use('/api/admin', require('./routes/admin/add-course'));     
