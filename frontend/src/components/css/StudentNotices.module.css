@@ -1,0 +1,47 @@
+.heading {
+  color: #003366;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.noticeTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  color: #222;
+  margin-top: 1rem;
+}
+
+.noticeTable th,
+.noticeTable td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.noticeTable th {
+  background: #f5f5f5;
+  color: #003366;
+}
+
+.noticeTable tr:nth-child(even) {
+  background: #fafbff;
+}
+
+.noticeTable tr:hover {
+  background: #e6f0ff;
+}
+
+.downloadBtn {
+  background: #003366;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.downloadBtn:hover {
+  background: #0055a5;
+}

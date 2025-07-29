@@ -18,6 +18,8 @@ import StudentMyProfilebankaccountinformation from './components/JS/Student/Stud
 import StudentMyProfileemergencycontactperson from './components/JS/Student/StudentMyProfileemergencycontactperson';
 import StudentEnrollCourses from './components/JS/Student/StudentEnrollCourses';
 import StudentRequests from './components/JS/Student/StudentRequests';
+import StudentDues from './components/JS/Student/StudentDues';
+import StudentNotices from './components/JS/Student/StudentNotices';
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
 import AdminHome from './components/JS/Admin/AdminHome';
@@ -27,6 +29,9 @@ import AdminAddCourse from './components/JS/Admin/AdminAddCourse';
 import AdminAssignTeacher from './components/JS/Admin/AdminAssignTeacher';
 import AdminPendingRequest from './components/JS/Admin/AdminPendingRequest';
 import AdminRespondedRequests from './components/JS/Admin/AdminRespondedRequests';
+import AdminAddFee from './components/JS/Admin/AdminAddFee';
+import AdminPendingPayments from './components/JS/Admin/AdminPendingPayments';
+import AdminSendNoticeWithFile from './components/JS/Admin/AdminSendNoticeWithFile';
 
 
 
@@ -142,6 +147,22 @@ const App = () => {
               </PrivateRoute>
             } 
           />
+          <Route 
+            path="/student/dues" 
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentDues />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/student/notices" 
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentNotices />
+              </PrivateRoute>
+            } 
+          />
 
           {/* Private Routes for Admin */}
           <Route 
@@ -197,6 +218,30 @@ const App = () => {
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminRespondedRequests />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/addfee" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminAddFee />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/pendingpayments" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminPendingPayments />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin/sendnotices" 
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminSendNoticeWithFile />
               </PrivateRoute>
             } 
           />

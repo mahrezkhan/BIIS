@@ -19,7 +19,7 @@ const AdminPendingStudents = () => {
   useEffect(() => {
     const fetchPendingStudents = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         const response = await axios.get(
           "http://localhost:5050/api/admin/pending-students",
           {
@@ -29,8 +29,10 @@ const AdminPendingStudents = () => {
           }
         );
         setPendingStudents(response.data);
+        console.log("Pending Students:", response.data);
       } catch (err) {
         console.error(err);
+        console.log("Pending Students:",err);
         setError("Error fetching pending students.");
       }
     };

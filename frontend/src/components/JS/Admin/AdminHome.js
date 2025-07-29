@@ -74,6 +74,33 @@ const AdminHome = () => {
             }>
             Responded Requests
           </a>
+          <a
+            href="/admin/addfee"
+            className={
+              location.pathname === "/admin/addfee"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Add Fee
+          </a>
+          <a
+            href="/admin/pendingpayments"
+            className={
+              location.pathname === "/admin/pendingpayments"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            pending payments
+          </a>
+          <a
+            href="/admin/sendnotices"
+            className={
+              location.pathname === "/admin/sendnotices"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Send Notices
+          </a>
           
         </nav>
       </aside>

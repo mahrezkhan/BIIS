@@ -97,6 +97,40 @@ const StudentEnrollCourses = () => {
             Enroll
           </a>
           <a
+            href="/student/requests"
+            className={
+              location.pathname === "/student/requests"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Request
+          </a>
+          <a
+            href="/student/dues"
+            className={
+              location.pathname === "/student/dues"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Dues
+          </a>
+          <a
+            href="/student/notices"
+            className={
+              location.pathname === "/student/notices"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Notices
+          </a>
+          <a
+            href="/student/dashboard"
+            className={
+              location.pathname === "/student/dashboard"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }></a>
+          <a
             href="/student/dashboard"
             className={
               location.pathname === "/student/dashboard"
@@ -164,7 +198,7 @@ const StudentEnrollCourses = () => {
                     </tbody>
                   </table>
                 </div>
-                
+
                 <div className={styles.buttonWrapper}>
                   <button
                     type="submit"
@@ -184,9 +218,9 @@ const StudentEnrollCourses = () => {
           </>
         )}
         {error && <div className={styles.error}>{error}</div>}
-                {successMessage && (
-                  <div className={styles.success}>{successMessage}</div>
-                )}
+        {successMessage && (
+          <div className={styles.success}>{successMessage}</div>
+        )}
       </div>
     </div>
   );
