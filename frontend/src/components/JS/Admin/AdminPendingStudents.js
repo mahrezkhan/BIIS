@@ -20,6 +20,7 @@ const AdminPendingStudents = () => {
     const fetchPendingStudents = async () => {
       try {
         const token = sessionStorage.getItem("token");
+        console.log("Fetching pending students with token:", token);
         const response = await axios.get(
           "http://localhost:5050/api/admin/pending-students",
           {
@@ -70,7 +71,7 @@ const AdminPendingStudents = () => {
 
   const submitApproval = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       // Prepare the data for submission
       const approvalData = {

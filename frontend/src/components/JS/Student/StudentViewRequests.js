@@ -4,10 +4,16 @@ import styles from "../../css/Table.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 const StudentViewRequests = () => {
   const [requests, setRequests] = useState([]);
+  const [requestType, setRequestType] = useState("");
+  const [requestContent, setRequestContent] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const [loading, setLoading] = useState(true);
   const token = sessionStorage.getItem("token");
   const location = useLocation();
+  const [showModal, setShowModal] = useState(false); // Show/Hide approval modal
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -25,6 +31,39 @@ const StudentViewRequests = () => {
     };
     fetchRequests();
   }, [token]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.post(
+        "/student/create-request",
+        {
+          request_type: requestType,
+          request_content: requestContent,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // If successful, update the requests list
+      const updatedRequests = await axios.get("/student/view-requests", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setRequests(updatedRequests.data.requests || []);
+
+      // Clear form and close modal
+      setRequestType("");
+      setRequestContent("");
+      setShowModal(false);
+      setSuccess("Request submitted successfully!");
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to submit request");
+    }
+  };
 
   return (
     <div className={styles.dashboard}>
@@ -132,7 +171,54 @@ const StudentViewRequests = () => {
             ))}
           </tbody>
         </table>
+        <div className={styles.buttonWrapper}>
+        <button
+          type="submit"
+          className={styles.approveBtn}
+          // onClick={handleSubmit1} // Uncomment this line to show the modal
+          //onClick={() => setShowModal(true)} >// Show modal on button click
+          onClick={() => setShowModal(true)}>
+          New Request
+        </button>
       </div>
+      </div>
+      
+      {showModal && (
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <h2 className={styles.modelh2}>New Request</h2>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+              <label className={styles.modelh2}>Request Type:</label>
+              <input
+                type="text"
+                value={requestType}
+                onChange={(e) => setRequestType(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.modelh2}>Request Content:</label>
+              <input
+                type="text"
+                value={requestContent}
+                onChange={(e) => setRequestContent(e.target.value)}
+                required
+              />
+            </div>
+            {error && <p className={styles.error}>{error}</p>}
+            {success && <p className={styles.success}>{success}</p>}
+            <div className={styles.modalButtons}>
+              <button type="submit">Submit</button>
+              <button type="button" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    )}
     </div>
   );
 };

@@ -11,11 +11,11 @@ const AdminPendingTeachers = () => {
   const [departmentId, setDepartmentId] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
+const token = sessionStorage.getItem("token");
   useEffect(() => {
     const fetchpendingTeachers = async () => {
       try {
-        const token = localStorage.getItem("token");
+        
         const response = await axios.get(
           "http://localhost:5050/api/admin/pending-teachers",
           {
@@ -42,7 +42,6 @@ const AdminPendingTeachers = () => {
 
   const handleReject = async (login_id) => {
     try {
-      const token = sessionStorage.getItem("token");
       await axios.put(
         `http://localhost:5050/api/admin/reject-teacher/${login_id}`,
         {},
@@ -64,7 +63,6 @@ const AdminPendingTeachers = () => {
 
   const submitApproval = async () => {
     try {
-      const token = localStorage.getItem("token");
 
       // Prepare the data for submission
       const approvalData = {

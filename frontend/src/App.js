@@ -17,7 +17,7 @@ import StudentMyProfileaddress from './components/JS/Student/StudentMyProfileadd
 import StudentMyProfilebankaccountinformation from './components/JS/Student/StudentMyProfilebankaccountinformation';
 import StudentMyProfileemergencycontactperson from './components/JS/Student/StudentMyProfileemergencycontactperson';
 import StudentEnrollCourses from './components/JS/Student/StudentEnrollCourses';
-import StudentRequests from './components/JS/Student/StudentRequests';
+import StudentViewRequests from './components/JS/Student/StudentViewRequests';
 import StudentDues from './components/JS/Student/StudentDues';
 import StudentNotices from './components/JS/Student/StudentNotices';
 
@@ -143,7 +143,7 @@ const App = () => {
             path="/student/requests" 
             element={
               <PrivateRoute roleRequired="student">
-                <StudentRequests />
+                <StudentViewRequests />
               </PrivateRoute>
             } 
           />
