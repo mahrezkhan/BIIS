@@ -21,6 +21,7 @@ const TeacherSignin = () => {
       const response = await axios.post("/auth/signin", {
         login_id: TeacherId,
         password: password,
+        user_type: "teacher"
       });
 
       const { token } = response.data;

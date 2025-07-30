@@ -38,6 +38,24 @@ const TeacherHome = () => {
             Enrollment Request
           </a>
           <a
+            href="/teacher/mycourses"
+            className={
+              location.pathname === "/teacher/mycourses"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            My Courses
+          </a>
+          <a
+            href="/teacher/addmarks"
+            className={
+              location.pathname === "/teacher/addmarks"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Add Marks
+          </a>
+          <a
             href="/student/dashboard"
             className={
               location.pathname === "/student/dashboard"
