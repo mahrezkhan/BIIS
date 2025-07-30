@@ -147,15 +147,7 @@ const StudentMyProfilebankaccountinformation = () => {
             }>
             Personal Information
           </a>
-          <a
-            href="/student/myprofile/hall"
-            className={
-              location.pathname === "/student/myprofile/hall"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Hall
-          </a>
+          
           <a
             href="/student/myprofile/address"
             className={

@@ -14,7 +14,6 @@ import StudentSignin from "./components/JS/Student/StudentSignin";
 import StudentSignup from "./components/JS/Student/StudentSignup";
 import StudentHome from "./components/JS/Student/StudentHome";
 import StudentMyProfilepersonalinformation from "./components/JS/Student/StudentMyProfilepersonalinformation";
-import StudentMyProfilehall from "./components/JS/Student/StudentMyProfilehall";
 import StudentMyProfileaddress from "./components/JS/Student/StudentMyProfileaddress";
 import StudentMyProfilebankaccountinformation from "./components/JS/Student/StudentMyProfilebankaccountinformation";
 import StudentMyProfileemergencycontactperson from "./components/JS/Student/StudentMyProfileemergencycontactperson";
@@ -160,14 +159,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/student/myprofile/hall"
-            element={
-              <PrivateRoute roleRequired="student">
-                <StudentMyProfilehall />
-              </PrivateRoute>
-            }
-          />
+          
           <Route
             path="/student/myprofile/address"
             element={
