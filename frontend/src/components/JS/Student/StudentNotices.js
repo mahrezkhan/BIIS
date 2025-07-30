@@ -92,22 +92,22 @@ const StudentNotices = () => {
             Notices
           </a>
           <a
-            href="/student/dashboard"
+            href="/student/viewcgpa"
             className={
-              location.pathname === "/student/dashboard"
+              location.pathname === "/student/viewcgpa"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Users
+            View CGPA
           </a>
           <a
-            href="/student/settings"
+            href="/student/courses"
             className={
-              location.pathname === "/student/settings"
+              location.pathname === "/student/courses"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Settings
+            View Courses
           </a>
         </nav>
       </aside>

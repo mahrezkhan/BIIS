@@ -21,6 +21,7 @@ const AdminSignin = () => {
       const response = await axios.post("/auth/signin", {
         login_id: AdminId,
         password: password,
+        user_type: "admin"
       });
 
       const { token } = response.data;

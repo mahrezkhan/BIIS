@@ -1,19 +1,34 @@
-// src/components/StudentDashboard.js
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "../../../api/axiosInstance";
+import styles from "../../css/Table.module.css";
 
-import styles from "../../css/Home.module.css";
-
-const StudentHome = () => {
-  // const navigate = useNavigate();;
+const StudentViewCourses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const location = useLocation();
-  const navigate = useNavigate();
-  // Close dropdown if clicked outside
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("role");
-    sessionStorage.removeItem("login_id");
-    navigate("/student/signin");
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const fetchCourses = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      const response = await axios.get("/student/view-courses", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCourses(response.data.courses || []);
+      setError("");
+    } catch (err) {
+      console.error("Error fetching courses:", err);
+      setError(err.response?.data?.message || "Failed to fetch courses");
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
@@ -81,7 +96,6 @@ const StudentHome = () => {
                 : styles.navLink
             }>
             View CGPA
-          
           </a>
           <a
             href="/student/courses"
@@ -91,15 +105,46 @@ const StudentHome = () => {
                 : styles.navLink
             }>
             View Courses
-          
           </a>
         </nav>
       </aside>
-      <button className={styles.logout} onClick={handleLogout}>
-        Logout
-      </button>
+
+      <div className={styles.mainContent}>
+        <div className={styles.contentHeader}>
+          <h2>My Courses</h2>
+        </div>
+
+        {loading ? (
+          <div className={styles.loading}>Loading courses...</div>
+        ) : error ? (
+          <div className={styles.error}>{error}</div>
+        ) : courses.length === 0 ? (
+          <div className={styles.noData}>No courses found</div>
+        ) : (
+          <div className={styles.tableContainer}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Title</th>
+                  <th>Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => (
+                  <tr key={course.course_id}>
+                    <td>{course.course_id}</td>
+                    <td>{course.title}</td>
+                    <td>{course.credit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default StudentHome;
+export default StudentViewCourses;

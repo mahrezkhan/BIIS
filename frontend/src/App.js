@@ -23,6 +23,9 @@ import StudentViewRequests from "./components/JS/Student/StudentViewRequests";
 import StudentDues from "./components/JS/Student/StudentDues";
 import StudentPaymentHistory from "./components/JS/Student/StudentPaymentHistory";
 import StudentNotices from "./components/JS/Student/StudentNotices";
+import StudentViewCGPA from "./components/JS/Student/StudentViewCGPA";
+import StudentViewCourses from "./components/JS/Student/StudentViewCourses";
+
 
 import AdminSignin from "./components/JS/Admin/AdminSignin";
 import AdminHome from "./components/JS/Admin/AdminHome";
@@ -35,7 +38,7 @@ import AdminRespondedRequests from "./components/JS/Admin/AdminRespondedRequests
 import AdminAddFee from "./components/JS/Admin/AdminAddFee";
 import AdminPendingPayments from "./components/JS/Admin/AdminPendingPayments";
 import AdminSendNoticeWithFile from "./components/JS/Admin/AdminSendNoticeWithFile";
-
+import AdminPublishResult from './components/JS/Admin/AdminPublishResult';
 import A from "./components/JS/Admin/A";
 import "./index.css";
 import PrivateRoute from "./PrivateRoute";
@@ -230,6 +233,30 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/student/viewcgpa"
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentViewCGPA />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/viewcgpa"
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentViewCGPA />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/student/courses"
+            element={
+              <PrivateRoute roleRequired="student">
+                <StudentViewCourses />
+              </PrivateRoute>
+            }
+          />
 
           {/* Private Routes for Admin */}
           <Route
@@ -309,6 +336,14 @@ const App = () => {
             element={
               <PrivateRoute roleRequired="admin">
                 <AdminSendNoticeWithFile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/publishresult"
+            element={
+              <PrivateRoute roleRequired="admin">
+                <AdminPublishResult />
               </PrivateRoute>
             }
           />

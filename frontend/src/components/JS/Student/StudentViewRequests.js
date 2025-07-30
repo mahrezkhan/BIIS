@@ -107,6 +107,15 @@ const StudentViewRequests = () => {
             Dues
           </a>
           <a
+            href="/student/paymenthistory"
+            className={
+              location.pathname === "/student/paymenthistory"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Payment History
+          </a>
+          <a
             href="/student/notices"
             className={
               location.pathname === "/student/notices"
@@ -116,22 +125,22 @@ const StudentViewRequests = () => {
             Notices
           </a>
           <a
-            href="/student/dashboard"
+            href="/student/viewcgpa"
             className={
-              location.pathname === "/student/dashboard"
+              location.pathname === "/student/viewcgpa"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Users
+            View CGPA
           </a>
           <a
-            href="/student/settings"
+            href="/student/courses"
             className={
-              location.pathname === "/student/settings"
+              location.pathname === "/student/courses"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Settings
+            View Courses
           </a>
         </nav>
       </aside>
@@ -154,76 +163,77 @@ const StudentViewRequests = () => {
                 <td colSpan="6">No pending requests found.</td>
               </tr>
             ) : (
-            requests.map((req) => (
-              <tr key={req.request_id}>
-                <td>{req.request_id}</td>
-                <td>{req.request_type}</td>
-                <td>{req.request_content}</td>
-                <td>{new Date(req.request_date).toLocaleString()}</td>
-                <td>{req.status}</td>
-                <td>
-                  {req.responses && req.responses.length > 0 ? (
-                    <ul>
-                      {req.responses.map((resp, idx) => (
-                        <li key={idx}>{resp.response_content}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    "No response yet"
-                  )}
-                </td>
-              </tr>
-            )))}
+              requests.map((req) => (
+                <tr key={req.request_id}>
+                  <td>{req.request_id}</td>
+                  <td>{req.request_type}</td>
+                  <td>{req.request_content}</td>
+                  <td>{new Date(req.request_date).toLocaleString()}</td>
+                  <td>{req.status}</td>
+                  <td>
+                    {req.responses && req.responses.length > 0 ? (
+                      <ul>
+                        {req.responses.map((resp, idx) => (
+                          <li key={idx}>{resp.response_content}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "No response yet"
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
         <div className={styles.buttonWrapper}>
-        <button
-          type="submit"
-          className={styles.approveBtn}
-          // onClick={handleSubmit1} // Uncomment this line to show the modal
-          //onClick={() => setShowModal(true)} >// Show modal on button click
-          onClick={() => setShowModal(true)}>
-          New Request
-        </button>
-      </div>
-      </div>
-      
-      {showModal && (
-      <div className={styles.modal}>
-        <div className={styles.modalContent}>
-          <h2 className={styles.modelh2}>New Request</h2>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label className={styles.modelh2}>Request Type:</label>
-              <input
-                type="text"
-                value={requestType}
-                onChange={(e) => setRequestType(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.modelh2}>Request Content:</label>
-              <input
-                type="text"
-                value={requestContent}
-                onChange={(e) => setRequestContent(e.target.value)}
-                required
-              />
-            </div>
-            {error && <p className={styles.error}>{error}</p>}
-            {success && <p className={styles.success}>{success}</p>}
-            <div className={styles.modalButtons}>
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => setShowModal(false)}>
-                Cancel
-              </button>
-            </div>
-          </form>
+          <button
+            type="submit"
+            className={styles.approveBtn}
+            // onClick={handleSubmit1} // Uncomment this line to show the modal
+            //onClick={() => setShowModal(true)} >// Show modal on button click
+            onClick={() => setShowModal(true)}>
+            New Request
+          </button>
         </div>
       </div>
-    )}
+
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2 className={styles.modelh2}>New Request</h2>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label className={styles.modelh2}>Request Type:</label>
+                <input
+                  type="text"
+                  value={requestType}
+                  onChange={(e) => setRequestType(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label className={styles.modelh2}>Request Content:</label>
+                <input
+                  type="text"
+                  value={requestContent}
+                  onChange={(e) => setRequestContent(e.target.value)}
+                  required
+                />
+              </div>
+              {error && <p className={styles.error}>{error}</p>}
+              {success && <p className={styles.success}>{success}</p>}
+              <div className={styles.modalButtons}>
+                <button type="submit">Submit</button>
+                <button type="button" onClick={() => setShowModal(false)}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

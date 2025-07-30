@@ -134,6 +134,15 @@ const StudentDues = () => {
             Dues
           </a>
           <a
+            href="/student/paymenthistory"
+            className={
+              location.pathname === "/student/paymenthistory"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Payment History
+          </a>
+          <a
             href="/student/notices"
             className={
               location.pathname === "/student/notices"
@@ -143,22 +152,22 @@ const StudentDues = () => {
             Notices
           </a>
           <a
-            href="/student/dashboard"
+            href="/student/viewcgpa"
             className={
-              location.pathname === "/student/dashboard"
+              location.pathname === "/student/viewcgpa"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Users
+            View CGPA
           </a>
           <a
-            href="/student/settings"
+            href="/student/courses"
             className={
-              location.pathname === "/student/settings"
+              location.pathname === "/student/courses"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Settings
+            View Courses
           </a>
         </nav>
       </aside>
@@ -182,18 +191,19 @@ const StudentDues = () => {
                 <td colSpan="6">No pending dues found.</td>
               </tr>
             ) : (
-            dues.map((due) => (
-              <tr key={due.due_code}>
-                <td>{due.due_code}</td>
-                <td>{due.fee_type}</td>
-                <td>{due.amount}</td>
-                <td>{new Date(due.due_date).toLocaleDateString()}</td>
-                <td>{due.status}</td>
-                <td>
-                  <button onClick={() => done(due)}>Pay Fee</button>
-                </td>
-              </tr>
-            )))}
+              dues.map((due) => (
+                <tr key={due.due_code}>
+                  <td>{due.due_code}</td>
+                  <td>{due.fee_type}</td>
+                  <td>{due.amount}</td>
+                  <td>{new Date(due.due_date).toLocaleDateString()}</td>
+                  <td>{due.status}</td>
+                  <td>
+                    <button onClick={() => done(due)}>Pay Fee</button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
