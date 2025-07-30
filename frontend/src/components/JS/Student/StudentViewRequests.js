@@ -189,7 +189,7 @@ const StudentViewRequests = () => {
         <div className={styles.buttonWrapper}>
           <button
             type="submit"
-            className={styles.approveBtn}
+            className={styles.submitBtn}
             // onClick={handleSubmit1} // Uncomment this line to show the modal
             //onClick={() => setShowModal(true)} >// Show modal on button click
             onClick={() => setShowModal(true)}>

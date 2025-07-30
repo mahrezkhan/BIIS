@@ -205,3 +205,21 @@ button:hover {
 .modelh2{
   color: #000;
 }
+
+.submitBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancelBtn {
+  background-color: #dc3545;
+  color: #333;
+}
+
+.submitBtn:hover {
+  background-color: #218838;
+}
+
+.cancelBtn:hover {
+  background-color: #c82333;
+}

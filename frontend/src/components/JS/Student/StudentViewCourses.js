@@ -109,40 +109,33 @@ const StudentViewCourses = () => {
         </nav>
       </aside>
 
-      <div className={styles.mainContent}>
-        <div className={styles.contentHeader}>
-          <h2>My Courses</h2>
-        </div>
-
-        {loading ? (
-          <div className={styles.loading}>Loading courses...</div>
-        ) : error ? (
-          <div className={styles.error}>{error}</div>
-        ) : courses.length === 0 ? (
-          <div className={styles.noData}>No courses found</div>
-        ) : (
-          <div className={styles.tableContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Course Code</th>
-                  <th>Course Title</th>
-                  <th>Credit</th>
+      <div className={styles.Container}>
+        <h2>My Courses</h2>
+          <table className={styles.Table}>
+            <thead>
+              <tr>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                <th>Credit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {courses.length === 0 ? (
+              <tr>
+                <td colSpan="3">No courses found.</td>
+              </tr>
+            ) : (
+              courses.map((course) => (
+                <tr key={course.course_id}>
+                  <td>{course.course_id}</td>
+                  <td>{course.title}</td>
+                  <td>{course.credit}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {courses.map((course) => (
-                  <tr key={course.course_id}>
-                    <td>{course.course_id}</td>
-                    <td>{course.title}</td>
-                    <td>{course.credit}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+              )))}
+            </tbody>
+          </table>
+        </div>
+      
     </div>
   );
 };

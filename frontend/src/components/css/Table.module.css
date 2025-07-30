@@ -15,6 +15,46 @@
   flex-direction: column;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
 }
+.sidebar:hover {
+  width: 280px;
+}
+
+.sidebartitle {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 12px #82aaff88;
+}
+
+/* Navigation Links */
+.navLink {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 2px solid white;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.navLink:hover {
+  background: #3f8ac4;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+  border: 2px solid #3f8ac4;
+}
+
+.activeNavLink {
+  background: #3f8ac4;
+  color: #fff;
+  border: 2px solid rgba(63, 138, 196, 0.1);
+  box-shadow: 0 4px 15px rgba(63, 138, 196, 0.1), inset 0 0 10px rgba(63, 138, 196, 0.1);
+}
 
 .Container {
   flex: 1;
@@ -146,21 +186,21 @@
 }
 
 .submitBtn {
-  background-color: #036600;
+  background-color: #28a745;
   color: white;
 }
 
 .cancelBtn {
-  background-color: #e0e0e0;
+  background-color: #dc3545;
   color: #333;
 }
 
 .submitBtn:hover {
-  background-color: #004080;
+  background-color: #218838;
 }
 
 .cancelBtn:hover {
-  background-color: #d0d0d0;
+  background-color: #c82333;
 }
 
 .error {

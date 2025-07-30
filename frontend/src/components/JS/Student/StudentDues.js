@@ -199,7 +199,7 @@ const StudentDues = () => {
                   <td>{new Date(due.due_date).toLocaleDateString()}</td>
                   <td>{due.status}</td>
                   <td>
-                    <button onClick={() => done(due)}>Pay Fee</button>
+                    <button className={styles.submitBtn} onClick={() => done(due)}>Pay Fee</button>
                   </td>
                 </tr>
               ))
@@ -261,8 +261,8 @@ const StudentDues = () => {
               {success && <p className={styles.success}>{success}</p>}
 
               <div className={styles.modalButtons}>
-                <button type="submit">Submit</button>
-                <button type="button" onClick={() => setShowModal(false)}>
+                <button className={styles.submitBtn} type="submit">Submit</button>
+                <button className={styles.cancelBtn} type="button" onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
               </div>

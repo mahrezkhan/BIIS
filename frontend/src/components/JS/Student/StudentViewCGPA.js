@@ -139,9 +139,8 @@ const StudentViewCGPA = () => {
         </nav>
       </aside>
 
-      <div className={styles.mainContent}>
+      <div className={styles.Container}>
         <h2>View CGPA by Level-Term</h2>
-
         <div className={styles.filterSection}>
           <select
             value={selectedTerm}
@@ -156,25 +155,9 @@ const StudentViewCGPA = () => {
             ))}
           </select>
         </div>
-
-        {loading && <div className={styles.loading}>Loading...</div>}
-
-        {error && <div className={styles.error}>{error}</div>}
-
         {cgpaData && (
           <div className={styles.cgpaContainer}>
-            <div className={styles.cgpaSummary}>
-              <h3>
-                Total CGPA:{" "}
-                <span>
-                  {typeof cgpaData.total_cgpa === "number"
-                    ? cgpaData.total_cgpa.toFixed(2)
-                    : "N/A"}
-                </span>
-              </h3>
-            </div>
-
-            <table className={styles.table}>
+            <table className={styles.Table}>
               <thead>
                 <tr>
                   <th>Course Code</th>
@@ -183,15 +166,35 @@ const StudentViewCGPA = () => {
                 </tr>
               </thead>
               <tbody>
-                {cgpaData.courses.map((course, index) => (
-                  <tr key={index}>
-                    <td>{course.course_id}</td>
-                    <td>{course.course_title}</td>
-                    <td>{course.course_cgpa.toFixed(2)}</td>
+                {cgpaData.length === 0 ? (
+                  <tr>
+                    <td colSpan="3">No CGPA data found.</td>
                   </tr>
-                ))}
+                ) : (
+                  cgpaData.courses.map((course, index) => (
+                    <tr key={index}>
+                      <td>{course.course_id}</td>
+                      <td>{course.course_title}</td>
+                      <td>
+                        {typeof course.course_cgpa === "number"
+                          ? course.course_cgpa.toFixed(2)
+                          : parseFloat(course.course_cgpa || 0).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
+            <div className={styles.cgpaSummary}>
+              <h3>
+                Total CGPA:{" "}
+                <span>
+                  {typeof cgpaData.total_cgpa === "number"
+                    ? cgpaData.total_cgpa.toFixed(2)
+                    : parseFloat(cgpaData.total_cgpa || 0).toFixed(2)}
+                </span>
+              </h3>
+            </div>
           </div>
         )}
       </div>

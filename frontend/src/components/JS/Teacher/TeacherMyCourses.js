@@ -91,6 +91,7 @@ const TeacherMyCourses = () => {
                   <td>{course.title}</td>
                   <td>
                     <button
+                      className={styles.submitBtn}
                       onClick={() => handleViewStudents(course.course_id)}
                       >
                       View Students

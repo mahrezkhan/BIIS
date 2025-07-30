@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import styles from "../../css/EnrollmentRequests.module.css"; // CSS file for styling
+import styles from "../../css/Table.module.css"; // CSS file for styling
 
 const EnrollmentRequests = () => {
   const [requests, setRequests] = useState([]); // All enrollment requests
@@ -158,9 +158,9 @@ const EnrollmentRequests = () => {
         </nav>
       </aside>
 
-      <div className={styles.dashboard1}>
+      <div className={styles.Container}>
         <h2>Enrollment Requests</h2>
-        <table className={styles.requestTable}>
+        <table className={styles.Table}>
           <thead>
             <tr>
               <th>Request ID</th>
@@ -174,7 +174,7 @@ const EnrollmentRequests = () => {
           <tbody>
             {requests.length === 0 ? (
               <tr>
-                <td colSpan="3">No pending students found.</td>
+                <td colSpan="6">No pending students found.</td>
               </tr>
             ) : (
               requests.map((request) => (

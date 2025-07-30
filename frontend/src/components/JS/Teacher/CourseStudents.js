@@ -102,8 +102,8 @@ const CourseStudents = () => {
                   <td>
                     <button
                       onClick={() => handleAddMarks(student.login_id)}
-                      className={styles.addMarksBtn}>
-                      Add/Update Marks
+                      className={styles.submitBtn}>
+                      Add / Update Marks
                     </button>
                   </td>
                 </tr>
