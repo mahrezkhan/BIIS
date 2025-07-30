@@ -46,33 +46,6 @@ const TeacherHome = () => {
             }>
             My Courses
           </a>
-          <a
-            href="/teacher/addmarks"
-            className={
-              location.pathname === "/teacher/addmarks"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Add Marks
-          </a>
-          <a
-            href="/student/dashboard"
-            className={
-              location.pathname === "/student/dashboard"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Users
-          </a>
-          <a
-            href="/student/settings"
-            className={
-              location.pathname === "/student/settings"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Settings
-          </a>
         </nav>
       </aside>
       <button className={styles.logout} onClick={handleLogout}>

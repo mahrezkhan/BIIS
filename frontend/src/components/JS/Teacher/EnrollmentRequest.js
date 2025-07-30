@@ -67,7 +67,6 @@ const EnrollmentRequests = () => {
           console.log(response1.data);
         } catch (err) {
           setError(err.data);
-          
         }
         setsuccess("approved");
         //alert("Enrollment request approved.");
@@ -78,7 +77,7 @@ const EnrollmentRequests = () => {
     }
   };
 
-  const handleReject= async (requestId, studentId) => {
+  const handleReject = async (requestId, studentId) => {
     setsuccess("");
     console.log("Reject request with ID:", requestId);
     try {
@@ -113,7 +112,6 @@ const EnrollmentRequests = () => {
           console.log(response1.data);
         } catch (err) {
           setError(err.data);
-          
         }
         setsuccess("rejected");
         //alert("Enrollment request approved.");
@@ -149,22 +147,13 @@ const EnrollmentRequests = () => {
             Enrollment Request
           </a>
           <a
-            href="/student/dashboard"
+            href="/teacher/mycourses"
             className={
-              location.pathname === "/student/dashboard"
+              location.pathname === "/teacher/mycourses"
                 ? `${styles.navLink} ${styles.activeNavLink}`
                 : styles.navLink
             }>
-            Users
-          </a>
-          <a
-            href="/student/settings"
-            className={
-              location.pathname === "/student/settings"
-                ? `${styles.navLink} ${styles.activeNavLink}`
-                : styles.navLink
-            }>
-            Settings
+            My Courses
           </a>
         </nav>
       </aside>
