@@ -165,7 +165,12 @@ const StudentViewCGPA = () => {
           <div className={styles.cgpaContainer}>
             <div className={styles.cgpaSummary}>
               <h3>
-                Total CGPA: <span>{cgpaData.total_cgpa.toFixed(2)}</span>
+                Total CGPA:{" "}
+                <span>
+                  {typeof cgpaData.total_cgpa === "number"
+                    ? cgpaData.total_cgpa.toFixed(2)
+                    : "N/A"}
+                </span>
               </h3>
             </div>
 
@@ -187,12 +192,6 @@ const StudentViewCGPA = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-        )}
-
-        {!loading && !error && levelTerms.length === 0 && (
-          <div className={styles.noData}>
-            No published results available yet.
           </div>
         )}
       </div>

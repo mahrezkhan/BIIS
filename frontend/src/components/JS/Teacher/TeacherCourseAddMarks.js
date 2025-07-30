@@ -62,10 +62,11 @@ const TeacherCourseAddMarks = () => {
       setLoading(false);
     }
   };
-
+const handleCancel = () => {
+    navigate(`/teacher/course/${courseId}/students`);
+  };
   return (
-    <div className={styles.formContainer}>
-      <h2>Add Marks for Course {courseId}</h2>
+    <div className={styles.dashboard}>
       <aside className={styles.sidebar}>
         <h2 className={styles.sidebartitle}>Teacher Portal</h2>
         <nav>
@@ -98,84 +99,78 @@ const TeacherCourseAddMarks = () => {
           </a>
         </nav>
       </aside>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label>Student ID:</label>
-          <input
-            type="text"
-            name="student_id"
-            value={formData.student_id}
-            onChange={handleChange}
-            required
-            placeholder="Enter student ID"
-          />
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <h2 className={styles.modelh2}>Add Marks for Course {courseId}</h2>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label className={styles.modelh2}>Student ID:</label>
+            <input
+              type="text"
+              name="student_id"
+              value={formData.student_id}
+              onChange={handleChange}
+              required
+              placeholder="Enter student ID"
+            />
+
+            <label className={styles.modelh2}>CT Marks:</label>
+            <input
+              type="number"
+              name="CT_marks"
+              value={formData.CT_marks}
+              onChange={handleChange}
+              min="0"
+              max="80"
+              step="0.01"
+              placeholder="Enter CT marks"
+            />
+
+            <label className={styles.modelh2}>Term Final Marks:</label>
+            <input
+              type="number"
+              name="TF_marks"
+              value={formData.TF_marks}
+              onChange={handleChange}
+              min="0"
+              max="280"
+              step="0.01"
+              placeholder="Enter term final marks"
+            />
+
+            <label className={styles.modelh2}>Attendance Marks:</label>
+            <input
+              type="number"
+              name="attendance_marks"
+              value={formData.attendance_marks}
+              onChange={handleChange}
+              min="0"
+              max="40"
+              step="0.01"
+              placeholder="Enter attendance marks"
+            />
+
+            <label className={styles.modelh2}>Total Possible Marks:</label>
+            <input
+              type="number"
+              name="total_possible_marks"
+              value={formData.total_possible_marks}
+              onChange={handleChange}
+              min="0"
+              required
+              placeholder="Enter total possible marks"
+            />
+
+            {error && <div className={styles.error}>{error}</div>}
+            {success && <div className={styles.success}>{success}</div>}
+            <div className={styles.modalButtons}>
+              <button type="submit">Add Marks</button>
+              <button type="button" onClick={handleCancel}>
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div className={styles.formGroup}>
-          <label>CT Marks:</label>
-          <input
-            type="number"
-            name="CT_marks"
-            value={formData.CT_marks}
-            onChange={handleChange}
-            min="0"
-            max="80"
-            step="0.01"
-            placeholder="Enter CT marks"
-          />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Term Final Marks:</label>
-          <input
-            type="number"
-            name="TF_marks"
-            value={formData.TF_marks}
-            onChange={handleChange}
-            min="0"
-            max="280"
-            step="0.01"
-            placeholder="Enter term final marks"
-          />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Attendance Marks:</label>
-          <input
-            type="number"
-            name="attendance_marks"
-            value={formData.attendance_marks}
-            onChange={handleChange}
-            min="0"
-            max="40"
-            step="0.01"
-            placeholder="Enter attendance marks"
-          />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Total Possible Marks:</label>
-          <input
-            type="number"
-            name="total_possible_marks"
-            value={formData.total_possible_marks}
-            onChange={handleChange}
-            min="0"
-            required
-            placeholder="Enter total possible marks"
-          />
-        </div>
-
-        {error && <div className={styles.error}>{error}</div>}
-        {success && <div className={styles.success}>{success}</div>}
-
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={loading}>
-          {loading ? "Adding Marks..." : "Add Marks"}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
