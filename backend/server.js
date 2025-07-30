@@ -55,6 +55,7 @@ app.use('/api/student',require('./routes/student/view-courses'));
 app.use('/api/student',require('./routes/student/view-cgpa-for-level-term'));
 app.use('/api/student',require('./routes/student/view-level-term-for-grade'));
 app.use('/api/student',require('./routes/student/change-password'));
+app.use('/api/student',require('./routes/student/view-hall-information'));
 
 
 //teacher
