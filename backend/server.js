@@ -85,6 +85,7 @@ app.use('/api/admin', require('./routes/admin/view-pending-requests'));
 app.use('/api/admin', require('./routes/admin/view-responded-requests'));   
 app.use('/api/admin', require('./routes/admin/reply-request'));   
 app.use('/api/admin', require('./routes/admin/publish-result'));   
+app.use('/api/admin', require('./routes/admin/sessions'));   
 
 //app.use('/api/admin/pending-teachers', require('./routes/admin/pending-users'));    
 
