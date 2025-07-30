@@ -122,6 +122,15 @@ const AdminRespondedRequests = () => {
             }>
             Send Notices
           </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
+          </a>
         </nav>
       </aside>
       <div className={styles.Container}>
@@ -148,7 +157,6 @@ const AdminRespondedRequests = () => {
                 <td>{req.response_content || "No response"}</td>
                 <td>{new Date(req.request_date).toLocaleString()}</td>
                 <td>{req.status}</td>
-                
               </tr>
             ))}
           </tbody>

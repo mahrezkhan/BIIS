@@ -29,7 +29,7 @@ const AdminPendingPayments = () => {
       const key = `${feeType}_pending`;
       setPayments(res.data[key] || []);
       setShowModal(false);
-      setOn(true)
+      setOn(true);
     } catch (err) {
       setPayments([]);
       setError(
@@ -156,6 +156,15 @@ const AdminPendingPayments = () => {
             }>
             Send Notices
           </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
+          </a>
         </nav>
       </aside>
       {showModal && (
@@ -193,7 +202,7 @@ const AdminPendingPayments = () => {
           </div>
         </div>
       )}
-      {!showModal && on &&(
+      {!showModal && on && (
         <div className={styles1.Container}>
           <table className={styles1.Table}>
             <thead>
@@ -212,39 +221,40 @@ const AdminPendingPayments = () => {
             </thead>
             <tbody>
               {payments.length === 0 ? (
-              <tr>
-                <td colSpan="10">No pending payments found.</td>
-              </tr>
-            ) : (
-              payments.map((p) => (
-                <tr key={p.payment_id}>
-                  <td>{p.payment_id}</td>
-                  <td>{p.due_code}</td>
-                  <td>{p.login_id}</td>
-                  <td>{p.amount}</td>
-                  <td>{p.payment_method}</td>
-                  <td>{p.transaction_id}</td>
-                  <td>{p.account_number}</td>
-                  <td>{p.status}</td>
-                  <td>{new Date(p.payment_date).toLocaleString()}</td>
-                  <td>
-                    <button
-                      onClick={() =>
-                        handleApproveReject(p.payment_id, "approve")
-                      }
-                      className={styles.approveBtn}>
-                      Approve
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleApproveReject(p.payment_id, "reject")
-                      }
-                      className={styles.rejectBtn}>
-                      Reject
-                    </button>
-                  </td>
+                <tr>
+                  <td colSpan="10">No pending payments found.</td>
                 </tr>
-               ) ))}
+              ) : (
+                payments.map((p) => (
+                  <tr key={p.payment_id}>
+                    <td>{p.payment_id}</td>
+                    <td>{p.due_code}</td>
+                    <td>{p.login_id}</td>
+                    <td>{p.amount}</td>
+                    <td>{p.payment_method}</td>
+                    <td>{p.transaction_id}</td>
+                    <td>{p.account_number}</td>
+                    <td>{p.status}</td>
+                    <td>{new Date(p.payment_date).toLocaleString()}</td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          handleApproveReject(p.payment_id, "approve")
+                        }
+                        className={styles.approveBtn}>
+                        Approve
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleApproveReject(p.payment_id, "reject")
+                        }
+                        className={styles.rejectBtn}>
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

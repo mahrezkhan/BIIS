@@ -114,7 +114,7 @@ const AdminAssignTeacher = () => {
             Pending Requests
           </a>
           <a
-            href="/admin/redpondedrequests"
+            href="/admin/respondedrequests"
             className={
               location.pathname === "/admin/respondedrequests"
                 ? `${styles.navLink} ${styles.activeNavLink}`
@@ -149,9 +149,18 @@ const AdminAssignTeacher = () => {
             }>
             Send Notices
           </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
+          </a>
         </nav>
       </aside>
-      {showModal &&
+      {showModal && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <h2 className={styles.modelh2}>Add New Course</h2>
@@ -187,7 +196,7 @@ const AdminAssignTeacher = () => {
             </form>
           </div>
         </div>
-      }
+      )}
     </div>
   );
 };

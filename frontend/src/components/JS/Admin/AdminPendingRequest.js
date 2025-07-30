@@ -180,12 +180,20 @@ const AdminPendingRequest = () => {
             }>
             Send Notices
           </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
+          </a>
         </nav>
       </aside>
 
       <div className={styles.Container}>
         <h2>Pending Requests</h2>
-
 
         <table className={styles.Table}>
           <thead>
@@ -245,7 +253,6 @@ const AdminPendingRequest = () => {
                   />
                 </div>
 
-                
                 {success && <p className={styles.success}>{success}</p>}
 
                 <div className={styles.modalButtons}>

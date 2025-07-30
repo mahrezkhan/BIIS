@@ -123,7 +123,7 @@ const AdminAddCourse = () => {
             Pending Requests
           </a>
           <a
-            href="/admin/redpondedrequests"
+            href="/admin/respondedrequests"
             className={
               location.pathname === "/admin/respondedrequests"
                 ? `${styles.navLink} ${styles.activeNavLink}`
@@ -157,6 +157,15 @@ const AdminAddCourse = () => {
                 : styles.navLink
             }>
             Send Notices
+          </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
           </a>
         </nav>
       </aside>

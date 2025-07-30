@@ -217,6 +217,15 @@ const AdminPendingStudents = () => {
             }>
             Send Notices
           </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
+          </a>
         </nav>
       </aside>
 

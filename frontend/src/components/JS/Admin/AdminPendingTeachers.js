@@ -12,11 +12,10 @@ const AdminPendingTeachers = () => {
   const [departmentId, setDepartmentId] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
     const fetchpendingTeachers = async () => {
       try {
-        
         const response = await axios.get(
           "http://localhost:5050/api/admin/pending-teachers",
           {
@@ -41,45 +40,44 @@ const token = sessionStorage.getItem("token");
     setShowModal(true); // Show the modal for additional information
   };
 
- const handleReject = async (login_id) => {
-  try {
-    const token = sessionStorage.getItem("token");
-    
-    const response = await axios.post(
-      "http://localhost:5050/api/admin/verify",
-      {
-        login_id: login_id,
-        action: "reject"
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  const handleReject = async (login_id) => {
+    try {
+      const token = sessionStorage.getItem("token");
 
-    if (response.status === 200) {
-      // Remove the rejected teacher from the list
-      setpendingTeachers((prevPending) =>
-        prevPending.filter((teacher) => teacher.login_id !== login_id)
+      const response = await axios.post(
+        "http://localhost:5050/api/admin/verify",
+        {
+          login_id: login_id,
+          action: "reject",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      setError(""); // Clear any existing errors
-      setSuccess("Teacher rejected successfully."); // Set success message
+
+      if (response.status === 200) {
+        // Remove the rejected teacher from the list
+        setpendingTeachers((prevPending) =>
+          prevPending.filter((teacher) => teacher.login_id !== login_id)
+        );
+        setError(""); // Clear any existing errors
+        setSuccess("Teacher rejected successfully."); // Set success message
+      }
+    } catch (err) {
+      console.error("Rejection Error:", err);
+      setSuccess(""); // Clear any existing success message
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Error rejecting the teacher.");
+      }
     }
-  } catch (err) {
-    console.error("Rejection Error:", err);
-    setSuccess(""); // Clear any existing success message
-    if (err.response?.data?.message) {
-      setError(err.response.data.message);
-    } else {
-      setError("Error rejecting the teacher.");
-    }
-  }
-};
+  };
 
   const submitApproval = async () => {
     try {
-
       // Prepare the data for submission
       const approvalData = {
         login_id: selectedTeacher.login_id,
@@ -208,6 +206,15 @@ const token = sessionStorage.getItem("token");
                 : styles.navLink
             }>
             Send Notices
+          </a>
+          <a
+            href="/admin/publishresult"
+            className={
+              location.pathname === "/admin/publishresult"
+                ? `${styles.navLink} ${styles.activeNavLink}`
+                : styles.navLink
+            }>
+            Publish Result
           </a>
         </nav>
       </aside>
